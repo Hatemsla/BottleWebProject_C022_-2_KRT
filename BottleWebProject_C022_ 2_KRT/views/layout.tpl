@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Команда 2</title>
+    <title>{{ title }} - Графы</title>
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
@@ -18,15 +18,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">Команда 2</a>
+                <a href="/" class="navbar-brand">Графы</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/home">Задача</a></li>
-                    <li><a href="/about">О нас</a></li>
                     <li><a href="/method1">Метод 1</a></li>
                     <li><a href="/method2">Метод 2</a></li>
                     <li><a href="/method3">Метод 3</a></li>
+                    <li><a href="/about">Авторы</a></li>
                 </ul>
             </div>
         </div>
@@ -36,7 +36,7 @@
         {{!base}}
         <hr />
         <footer>
-            <p>&copy; {{ year }} - Команда 2</p>
+            <p>&copy; {{ year }} - Графы</p>
         </footer>
     </div>
 

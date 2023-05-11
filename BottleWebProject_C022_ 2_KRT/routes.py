@@ -20,8 +20,8 @@ def contact():
     """Renders the method1 page."""
     return dict(
         title='Method1',
-        message='Your method1 page.',
-        year=datetime.now().year
+        message='0',
+        year=datetime.now().year,
     )
 
 @route('/method2')
