@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set VIRTUAL_ENV=C:\Work\Python\MDK02.02\BottleWebProject_C022_ 2_KRT\BottleWebProject_C022_ 2_KRT\env
+=======
+set VIRTUAL_ENV=C:\Users\NIK70\Documents\git\BottleWebProject_C022_2_KRT\BottleWebProject_C022_ 2_KRT\env
+>>>>>>> f110e4978fd254bf6fa0ed201b232e62b8abe413
 
 if not defined PROMPT set PROMPT=$P$G
 

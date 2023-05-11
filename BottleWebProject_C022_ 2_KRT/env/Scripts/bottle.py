@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!C:\Work\Python\MDK02.02\BottleWebProject_C022_ 2_KRT\BottleWebProject_C022_ 2_KRT\env\Scripts\python.exe
+=======
+#!C:\Users\NIK70\Documents\git\BottleWebProject_C022_2_KRT\BottleWebProject_C022_ 2_KRT\env\Scripts\python.exe
+>>>>>>> f110e4978fd254bf6fa0ed201b232e62b8abe413
 # -*- coding: utf-8 -*-
 """
 Bottle is a fast and simple micro-framework for small web applications. It
