@@ -23,9 +23,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/home">Задача</a></li>
-                    <li><a href="/method1">Метод 1</a></li>
-                    <li><a href="/method2">Метод 2</a></li>
-                    <li><a href="/method3">Метод 3</a></li>
+                    <li><a href="/method_subgraph">Метод 1</a></li>
+                    <li><a href="/method_max_connections">Метод 2</a></li>
+                    <li><a href="/method_eulerian_cycle">Метод 3</a></li>
                     <li><a href="/about">Авторы</a></li>
                 </ul>
             </div>

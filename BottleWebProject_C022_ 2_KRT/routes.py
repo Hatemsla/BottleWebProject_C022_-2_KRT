@@ -14,33 +14,33 @@ def home():
         year=datetime.now().year
     )
 
-@route('/method1')
-@view('method1')
+@route('/method_subgraph')
+@view('method_subgraph')
 def contact():
-    """Renders the method1 page."""
+    """Renders the method subgraph page."""
     return dict(
-        title='Method1',
+        title='Method Subgraph',
         message='0',
         year=datetime.now().year,
     )
 
-@route('/method2')
-@view('method2')
+@route('/method_max_connections')
+@view('method_max_connections')
 def contact():
-    """Renders the method2 page."""
+    """Renders the method max connections page."""
     return dict(
-        title='Method2',
-        message='Your method2 page.',
+        title='Method max connections',
+        message='Your method max connections page.',
         year=datetime.now().year
     )
 
-@route('/method3')
-@view('method3')
+@route('/method_eulerian_cycle')
+@view('method_eulerian_cycle')
 def contact():
-    """Renders the method3 page."""
+    """Renders the method eulerian cycle page."""
     return dict(
-        title='Method3',
-        message='Your method3 page.',
+        title='Method eulerian cycle',
+        message='Your method eulerian cycle page.',
         year=datetime.now().year
     )
 

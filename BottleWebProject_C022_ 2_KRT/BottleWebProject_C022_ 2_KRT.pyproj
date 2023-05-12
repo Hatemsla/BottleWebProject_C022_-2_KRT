@@ -31,13 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
-    <Compile Include="method1_handler.py">
+    <Compile Include="method_subgraph_handler.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="method2.py">
+    <Compile Include="method_max_connections.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="method3.py">
+    <Compile Include="method_eulerian_cycle.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes.py" />
@@ -53,6 +53,7 @@
     <Content Include="requirements.txt" />
     <Content Include="static\content\bootstrap.css" />
     <Content Include="static\content\bootstrap.min.css" />
+    <Content Include="static\content\method_subgraph.css" />
     <Content Include="static\content\site.css" />
     <Content Include="static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
@@ -74,11 +75,11 @@
     <Content Include="static\scripts\respond.min.js" />
     <Content Include="static\scripts\_references.js" />
     <Content Include="views\about.tpl" />
-    <Content Include="views\method1.tpl" />
+    <Content Include="views\method_subgraph.tpl" />
     <Content Include="views\index.tpl" />
     <Content Include="views\layout.tpl" />
-    <Content Include="views\method2.tpl" />
-    <Content Include="views\method3.tpl" />
+    <Content Include="views\method_max_connections.tpl" />
+    <Content Include="views\method_eulerian_cycle.tpl" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
