@@ -34,10 +34,10 @@
     <Compile Include="method_subgraph_handler.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="method_max_connections.py">
+    <Compile Include="method_max_connections_handler.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="method_eulerian_cycle.py">
+    <Compile Include="method_eulerian_cycle_handler.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes.py" />

@@ -19,9 +19,11 @@ def home():
 def contact():
     """Renders the method subgraph page."""
     return dict(
-        title='Method Subgraph',
-        message='0',
+        graph_count='0',
+        subgraph_count='0',
         year=datetime.now().year,
+        graph_data=[],
+        subgraph_data=[]
     )
 
 @route('/method_max_connections')
