@@ -1,15 +1,163 @@
-table {
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-width: 500px;
+    background-color: #F8F8F8;
+    border: 1px solid #CCC;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-width: auto;
+    background-color: #F8F8F8;
+    border: 1px solid #CCC;
+    padding: 20px;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.graph-image{
+    margin: 0px auto 0px auto;
+    display: block;
+}
+
+.graph-image-text{
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.info-li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+
+.form-input label {
+    font-size: 18px;
+}
+
+input[type="number"] {
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    width: 50px;
+    font-size: 18px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0077FF;
+    color: #FFF;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.form-buttons{
+    margin: 0 auto;
+}
+
+.confirm {
+    text-align: center;
+}
+
+    input[type="submit"]:hover {
+        background-color: #005EDD;
+    }
+
+.table-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.graph-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
-td {
-    width: auto;
+    .graph-table caption {
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .graph-table th,
+    .graph-table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #CCC;
+    }
+
+    .graph-table th:first-child,
+    .graph-table td:first-child {
+        font-weight: bold;
+        background-color: #F2F2F2;
+    }
+
+    .graph-table th:not(:first-child),
+    .graph-table td:not(:first-child) {
+        background-color: #FFFFFF;
+    }
+
+    .graph-table tbody td input[type="number"] {
+        width: 100%;
+        border: none;
+        text-align: center;
+    }
+
+    .graph-table tbody {
+        overflow: auto;
+        max-height: 200px;
+    }
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
 }
 
-input {
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+.btn-default {
+    color: #333333;
+    background-color: #FFFFFF;
+    border-color: #CCCCCC;
 }
+
+.result-container {
+    margin-top: 20px;
+}
+
+    .result-container p {
+        margin-bottom: 10px;
+    }
