@@ -28,8 +28,8 @@
             <input type="number" id="subgraph_count" value="{{subgraph_count}}" required min="2" max="20" pattern="[0-9]+" name="subgraph_count" placeholder="Размер клики">
         </div>
         <div class="form-buttons">
-            <input type="submit" name="form" value="Send1">
-            <input type="submit" name="form" value="Random">
+            <button type="submit" name="form" value="Send1">Построить матрицу</button>
+            <button type="submit" name="form" value="Random">Случайная матрица</button>
         </div>
     </form>
 </div>
@@ -65,7 +65,7 @@
                     %end
                 </tbody>
             </table>
-            <p class="confirm"><input type="submit" name="form" value="Confirm"></p>
+            <p class="confirm"><button type="submit" name="form" value="Confirm">Посчитать</button></p>
         </form>  
     </div>
 %end

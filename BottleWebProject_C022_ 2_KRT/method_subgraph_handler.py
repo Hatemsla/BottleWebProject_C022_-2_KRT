@@ -103,6 +103,7 @@ def calculate_random_subgraph_count(graph_data, subgraph_count):
 def form_handler():
     """Функция обработчик формы на сайта"""
     global graph_count, subgraph_count, graph_data, prev_graph_count
+
     if request.forms.get("form") == "Send1":
         graph_count = int(request.forms.get('graph_count'))
         subgraph_count = int(request.forms.get('subgraph_count'))
