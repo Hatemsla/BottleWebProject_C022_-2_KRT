@@ -5,9 +5,10 @@
 <h1>Требуется найти заданный подграф в данном графе</h1>
 <p>Бла-бла-бла</p>
 <form action="/method_subgraph" method="post">
-    <p><input type="number" value="{{graph_count}}" required min="2" required max="20" pattern="[0-9]+" name="graph_count" placeholder="Размер матрицы смежности графа"></p>
-    <p><input type="number" value="{{subgraph_count}}" required min="2" required max="20" pattern="[0-9]+" name="subgraph_count" placeholder="Размер клики"></p>
+    <p>Введите количество графов:<input type="number" value="{{graph_count}}" required min="2" required max="20" pattern="[0-9]+" name="graph_count" placeholder="Размер матрицы смежности графа"></p>
+    <p>Введите размер клики:<input type="number" value="{{subgraph_count}}" required min="2" required max="20" pattern="[0-9]+" name="subgraph_count" placeholder="Размер клики"></p>
     <p><input type="submit" name="form" value="Send1" class="btn btn-default"></p>
+    <p><input type="submit" name="form" value="Random" class="btn btn-default"></p>
 </form>
 
 <div>
