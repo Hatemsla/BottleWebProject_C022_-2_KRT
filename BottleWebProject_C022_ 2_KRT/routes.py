@@ -23,7 +23,8 @@ def contact():
         subgraph_count='0',
         year=datetime.now().year,
         graph_data=[],
-        subgraph_data=[]
+        cliques=[],
+        num_cliques=-1
     )
 
 @route('/method_max_connections')
