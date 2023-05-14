@@ -1,9 +1,6 @@
-% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques)
+% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques, image_base64=image_base64)
 
 <link rel="stylesheet" type="text/css" href="/static/content/method_subgraph.css" />
-
-<sctipt src="/static/scripts/method_subgraph.js"></script>
-
 
 <h1>Требуется найти заданный подграф в данном графе</h1>
 <p>Например, заданный подграф представляет собой полный граф из пяти вершин, степень каждой из которых равна четырем. На рисунке 1 представлены диаграмма подграфа и соответствующая ему матрица смежности вершин.</p>
@@ -70,11 +67,19 @@
     </div>
 %end
 <div class="result-container">
-    %if num_cliques > 0:
-        <p>Найдено подграфов: {{num_cliques}}</p>
-        %for i, clique in enumerate(cliques):
-            <p>Подграфы в графе {{i+1}}: {{clique}}</p>
+    <div class="graph-container">
+        %if image_base64:
+            <img src="data:image/png;base64,{{ image_base64 }}"/>
+            <p>Рисунок 2 - Граф</p>
         %end
+    </div>
+    %if num_cliques > 0:
+        <details>
+            <summary>Найдено подграфов: {{num_cliques}}</summary>
+            %for i, clique in enumerate(cliques):
+                <p>Подграфы в графе {{i+1}}: {{clique}}</p>
+            %end
+        </details>
     %elif num_cliques == 0:
         <p>Не найдено подграфов в графе</p>
     %end

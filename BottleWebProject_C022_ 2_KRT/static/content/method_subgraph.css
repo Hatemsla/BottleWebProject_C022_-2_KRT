@@ -17,7 +17,6 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    max-width: auto;
     background-color: #F8F8F8;
     border: 1px solid #CCC;
     padding: 20px;
@@ -168,3 +167,48 @@ button:hover {
     .result-container p {
         margin-bottom: 10px;
     }
+
+.graph-container {
+    text-align: center;
+    margin: 0 auto;
+    width: 50%;
+}
+
+details {
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5em;
+  }
+  
+  details summary {
+    position: relative;
+    font-weight: bold;
+    cursor: pointer;
+    padding-left: 1.5em; /* заменяем padding-right на padding-left */
+  }
+  
+  details summary::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0.5em; /* изменяем свойство left вместо right */
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+  }
+  
+  details[open] summary::before {
+    transform: translateY(-50%) rotate(-90deg);
+  }
+
+  details p {
+    padding-left: 25px;
+  }
+  
+summary{
+    font-size: 18px;
+    font-weight: bold;
+}

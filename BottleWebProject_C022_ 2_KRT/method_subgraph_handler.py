@@ -1,10 +1,15 @@
 from datetime import datetime
 import random
 from bottle import post, request, route, view
+import base64
+import io
+import networkx as nx
+import matplotlib.pyplot as plt
 
 graph_count = subgraph_count = 0
 prev_graph_count = 0
 graph_data = []
+image_base64 = ''
 
 
 def adjacency_matrix_to_graph(adj_matrix):
@@ -78,11 +83,12 @@ def calculate_subgraph_count(graph_count, subgraph_count):
         year=datetime.now().year,
         graph_data=graph_data,
         cliques=cliques,
-        num_cliques=num_cliques
+        num_cliques=num_cliques,
+        image_base64=image_base64
     )
 
 
-def calculate_random_subgraph_count(graph_data, subgraph_count):
+def calculate_random_subgraph_count(graph_data, subgraph_count, image_base64):
     """Функция для подсчета количества подграфов в случайно заданном графе"""
     graph = adjacency_matrix_to_graph(graph_data)
     num_cliques, cliques = find_cliques(graph, subgraph_count)
@@ -93,8 +99,47 @@ def calculate_random_subgraph_count(graph_data, subgraph_count):
         year=datetime.now().year,
         graph_data=graph_data,
         cliques=cliques,
-        num_cliques=num_cliques
+        num_cliques=num_cliques,
+        image_base64=image_base64
     )
+    
+
+def get_graph_edges(graph_data):
+    """Функция для конвертации матрицы смежности в список кортежей"""
+    n = len(graph_data)
+    edges = []
+    for i in range(n):
+        for j in range(i, n):
+            if graph_data[i][j] == 1:
+                edges.append((i+1, j+1))
+                
+    return edges
+    
+
+def get_graph_image(edges):
+    """Функция для получения изображения графа"""
+    G = nx.Graph()
+    G.clear()
+    G.add_edges_from(edges)
+    pos = nx.circular_layout(G)
+    nx.draw(G, pos, with_labels=True)
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.clf()
+    
+    return buf
+
+
+def get_graph_image64(graph_data):
+    """Функция для конвертации изображения графа в формат данных base64"""
+    edges = get_graph_edges(graph_data)
+
+    buf = get_graph_image(edges)
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    buf.close()
+        
+    return image_base64
 
 
 @post('/method_subgraph')
@@ -102,7 +147,7 @@ def calculate_random_subgraph_count(graph_data, subgraph_count):
 @view('method_subgraph')
 def form_handler():
     """Функция обработчик формы на сайта"""
-    global graph_count, subgraph_count, graph_data, prev_graph_count
+    global graph_count, subgraph_count, graph_data, prev_graph_count, image_base64
 
     if request.forms.get("form") == "Send1":
         graph_count = int(request.forms.get('graph_count'))
@@ -119,7 +164,8 @@ def form_handler():
             year=datetime.now().year,
             graph_data=graph_data,
             cliques=[],
-            num_cliques=-1
+            num_cliques=-1,
+            image_base64=''
         )
     elif request.forms.get("form") == "Confirm":
         return calculate_subgraph_count(graph_count, subgraph_count)
@@ -129,6 +175,9 @@ def form_handler():
 
         graph_data = generate_adjacency_matrix(graph_count, 0.6)
         
-        return calculate_random_subgraph_count(graph_data, subgraph_count)
+        image_base64 = get_graph_image64(graph_data)
+        
+        
+        return calculate_random_subgraph_count(graph_data, subgraph_count, image_base64)
     else:
         pass

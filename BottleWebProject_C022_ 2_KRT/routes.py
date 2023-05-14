@@ -24,7 +24,8 @@ def contact():
         year=datetime.now().year,
         graph_data=[],
         cliques=[],
-        num_cliques=-1
+        num_cliques=-1,
+        image_base64=''
     )
 
 @route('/method_max_connections')
