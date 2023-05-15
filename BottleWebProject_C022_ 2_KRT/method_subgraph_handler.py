@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 graph_count = subgraph_count = 0
 prev_graph_count = 0
 graph_data = []
-image_base64 = ''
+main_graph = ''
+
 
 
 def adjacency_matrix_to_graph(adj_matrix):
@@ -47,6 +48,7 @@ def find_subcliques(graph, prev_nodes, nodes, size):
                 for clique in find_subcliques(graph, prev_nodes + [node], nodes.intersection(graph[node]), size):
                     yield clique
 
+
 def generate_adjacency_matrix(n, p):
     """
     Функция генерирует матрицу смежности неориентированного графа
@@ -75,12 +77,13 @@ def get_form_graph_data(graph_count):
         graph_data.append(ls)
         
     return graph_data
+            
 
-
-def calculate_subgraph_count(graph_count, subgraph_count, image_base64):
+def calculate_subgraph_count(graph_count, subgraph_count, main_graph):
     """Функция для подсчета количества подграфов в графе заданного пользователем"""
     graph = adjacency_matrix_to_graph(graph_data)
     num_cliques, cliques = find_cliques(graph, subgraph_count)
+    subgraphs = get_subgraphs_image64(graph_data, cliques)
     cliques.sort(key=lambda x: x[0])
 
     return dict(
@@ -90,14 +93,16 @@ def calculate_subgraph_count(graph_count, subgraph_count, image_base64):
         graph_data=graph_data,
         cliques=cliques,
         num_cliques=num_cliques,
-        image_base64=image_base64
+        main_graph=main_graph,
+        subgraphs=subgraphs
     )
 
 
-def calculate_random_subgraph_count(graph_data, subgraph_count, image_base64):
+def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph):
     """Функция для подсчета количества подграфов в случайно заданном графе"""
     graph = adjacency_matrix_to_graph(graph_data)
     num_cliques, cliques = find_cliques(graph, subgraph_count)
+    subgraphs = get_subgraphs_image64(graph_data, cliques)
     cliques.sort(key=lambda x: x[0])
 
     return dict(
@@ -107,7 +112,8 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, image_base64):
         graph_data=graph_data,
         cliques=cliques,
         num_cliques=num_cliques,
-        image_base64=image_base64
+        main_graph=main_graph,
+        subgraphs=subgraphs
     )
     
 
@@ -121,6 +127,23 @@ def get_graph_edges(graph_data):
                 edges.append((i+1, j+1))
                 
     return edges
+
+
+def get_subgraph_image(edges, subgraph_data):
+    """Функция для получения изображения подграфа"""
+    G = nx.Graph()
+    G.clear()
+    G.add_edges_from(edges)
+    pos = nx.circular_layout(G)
+    node_colors = ['red' if node in subgraph_data else 'green' for node in G.nodes()]
+    nx.draw_networkx_nodes(G, pos, node_color=node_colors)
+    nx.draw_networkx_edges(G, pos)
+    nx.draw(G, pos)
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.clf()
+    
+    return buf
     
 
 def get_graph_image(edges):
@@ -129,24 +152,61 @@ def get_graph_image(edges):
     G.clear()
     G.add_edges_from(edges)
     pos = nx.circular_layout(G)
-    nx.draw(G, pos, with_labels=True)
+    nx.draw_networkx_nodes(G, pos, node_color='green')
+    nx.draw_networkx_edges(G, pos)
+    nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif")
     buf = io.BytesIO()
+    plt.box(False)
     plt.savefig(buf, format='png')
     plt.clf()
     
     return buf
 
 
+def get_subgraph_images(edges, cliques):
+    """Функция для получения картинок подграфов"""
+    G = nx.Graph()
+    G.clear()
+    G.add_edges_from(edges)
+    bufs = []
+    
+    for clique in cliques:
+        pos = nx.circular_layout(G)
+        node_colors = ['red' if node in clique else 'green' for node in G.nodes()]
+        nx.draw_networkx_nodes(G, pos, node_color=node_colors)
+        nx.draw_networkx_edges(G, pos)
+        nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif")
+        buf = io.BytesIO()
+        plt.box(False)
+        plt.savefig(buf, format='png')
+        bufs.append(buf)
+        plt.clf()
+    
+    return bufs
+
+
 def get_graph_image64(graph_data):
     """Функция для конвертации изображения графа в формат данных base64"""
     edges = get_graph_edges(graph_data)
-
     buf = get_graph_image(edges)
     buf.seek(0)
-    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    main_graph = base64.b64encode(buf.read()).decode('utf-8')
     buf.close()
         
-    return image_base64
+    return main_graph
+
+
+def get_subgraphs_image64(graph_data, cliques):
+    """Функция для получения картинок сабграфа"""
+    subgraph = []
+    edges = get_graph_edges(graph_data)
+    bufs = get_subgraph_images(edges, cliques)
+    for i in range(len(cliques)):
+        bufs[i].seek(0)
+        subgraph.append(base64.b64encode(bufs[i].read()).decode('utf-8'))
+        bufs[i].close()
+        
+    return subgraph
 
 
 @post('/method_subgraph')
@@ -154,7 +214,7 @@ def get_graph_image64(graph_data):
 @view('method_subgraph')
 def form_handler():
     """Функция обработчик формы на сайта"""
-    global graph_count, subgraph_count, graph_data, prev_graph_count, image_base64
+    global graph_count, subgraph_count, graph_data, prev_graph_count, main_graph
 
     if request.forms.get("form") == "Send1":
         graph_count = int(request.forms.get('graph_count'))
@@ -172,22 +232,23 @@ def form_handler():
             graph_data=graph_data,
             cliques=[],
             num_cliques=-1,
-            image_base64=''
+            main_graph='',
+            subgraphs=[]
         )
     elif request.forms.get("form") == "Confirm":
         graph_data = get_form_graph_data(graph_count)
         
-        image_base64 = get_graph_image64(graph_data)
+        main_graph = get_graph_image64(graph_data)
         
-        return calculate_subgraph_count(graph_count, subgraph_count, image_base64)
+        return calculate_subgraph_count(graph_count, subgraph_count, main_graph)
     elif request.forms.get("form") == "Random":
         graph_count = int(request.forms.get('graph_count'))
         subgraph_count = int(request.forms.get('subgraph_count'))
 
         graph_data = generate_adjacency_matrix(graph_count, 0.6)
         
-        image_base64 = get_graph_image64(graph_data)
+        main_graph = get_graph_image64(graph_data)
         
-        return calculate_random_subgraph_count(graph_data, subgraph_count, image_base64)
+        return calculate_random_subgraph_count(graph_data, subgraph_count, main_graph)
     else:
         pass

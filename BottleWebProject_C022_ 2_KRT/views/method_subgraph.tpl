@@ -1,4 +1,4 @@
-% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques, image_base64=image_base64)
+% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques, main_graph=main_graph, subgraphs=subgraphs)
 
 <link rel="stylesheet" type="text/css" href="/static/content/method_subgraph.css" />
 
@@ -68,12 +68,36 @@
 %end
 <div class="result-container">
     <div class="graph-container">
-        %if image_base64:
-            <img src="data:image/png;base64,{{ image_base64 }}"/>
+        %if main_graph:
+            <img src="data:image/png;base64,{{ main_graph }}"/>
             <p>Рисунок 2 - Граф</p>
         %end
     </div>
     %if num_cliques > 0:
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                %for i in range(num_cliques):
+                    %if i == 0:
+                        <div class="item active">
+                            <img src="data:image/png;base64,{{ subgraphs[i] }}" alt="{{i+1}} slide">
+                        </div>
+                    %else:
+                        <div class="item">
+                            <img src="data:image/png;base64,{{ subgraphs[i] }}" alt="{{i+1}} slide">
+                        </div>
+                    %end
+                %end
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+      
         <details>
             <summary>Найдено подграфов: {{num_cliques}}</summary>
             %for i, clique in enumerate(cliques):

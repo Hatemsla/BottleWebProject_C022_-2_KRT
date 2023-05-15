@@ -25,7 +25,8 @@ def contact():
         graph_data=[],
         cliques=[],
         num_cliques=-1,
-        image_base64=''
+        main_graph='',
+        subgraphs=[]
     )
 
 @route('/method_max_connections')
