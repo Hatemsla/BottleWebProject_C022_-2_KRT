@@ -65,17 +65,23 @@ def generate_adjacency_matrix(n, p):
     return matrix
 
 
-def calculate_subgraph_count(graph_count, subgraph_count):
-    """Функция для подсчета количества подграфов в графе заданного пользователем"""
+def get_form_graph_data(graph_count):
+    """Функция для получения данных о графе с таблицы смежности"""
     graph_data = []
     for i in range(graph_count):
         ls = []
         for j in range(graph_count):
             ls.append(int(request.forms.get(f"{i}{j}g")))
         graph_data.append(ls)
+        
+    return graph_data
 
+
+def calculate_subgraph_count(graph_count, subgraph_count, image_base64):
+    """Функция для подсчета количества подграфов в графе заданного пользователем"""
     graph = adjacency_matrix_to_graph(graph_data)
     num_cliques, cliques = find_cliques(graph, subgraph_count)
+    cliques.sort(key=lambda x: x[0])
 
     return dict(
         graph_count=f'{graph_count}',
@@ -92,6 +98,7 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, image_base64):
     """Функция для подсчета количества подграфов в случайно заданном графе"""
     graph = adjacency_matrix_to_graph(graph_data)
     num_cliques, cliques = find_cliques(graph, subgraph_count)
+    cliques.sort(key=lambda x: x[0])
 
     return dict(
         graph_count=f'{graph_count}',
@@ -168,7 +175,11 @@ def form_handler():
             image_base64=''
         )
     elif request.forms.get("form") == "Confirm":
-        return calculate_subgraph_count(graph_count, subgraph_count)
+        graph_data = get_form_graph_data(graph_count)
+        
+        image_base64 = get_graph_image64(graph_data)
+        
+        return calculate_subgraph_count(graph_count, subgraph_count, image_base64)
     elif request.forms.get("form") == "Random":
         graph_count = int(request.forms.get('graph_count'))
         subgraph_count = int(request.forms.get('subgraph_count'))
@@ -176,7 +187,6 @@ def form_handler():
         graph_data = generate_adjacency_matrix(graph_count, 0.6)
         
         image_base64 = get_graph_image64(graph_data)
-        
         
         return calculate_random_subgraph_count(graph_data, subgraph_count, image_base64)
     else:
