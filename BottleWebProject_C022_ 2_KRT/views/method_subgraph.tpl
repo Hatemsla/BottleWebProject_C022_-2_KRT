@@ -1,4 +1,4 @@
-% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques, main_graph=main_graph, subgraphs=subgraphs, is_valid_graph=is_valid_graph)
+% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques, main_graph=main_graph, subgraphs=subgraphs, is_valid_graph=is_valid_graph, is_subgraph_draw=is_subgraph_draw)
 
 <link rel="stylesheet" type="text/css" href="/static/content/method_subgraph.css" />
 
@@ -23,6 +23,14 @@
         <div class="form-input">
             <label for="subgraph_count">Введите размер клики:</label>
             <input type="number" id="subgraph_count" value="{{subgraph_count}}" required min="2" max="20" pattern="[0-9]+" name="subgraph_count" placeholder="Размер клики">
+        </div>
+        <div class="form-input">
+            <label for="subgraph_count">Рисовать подграфы:</label>
+            %if is_subgraph_draw:
+                <input type="checkbox" id="subgraph_count" name="is_subgraph_draw" checked>
+            %else:
+                <input type="checkbox" id="subgraph_count" name="is_subgraph_draw">
+            %end
         </div>
         <div class="form-buttons">
             <button type="submit" name="form" value="Send1">Построить матрицу</button>
@@ -73,29 +81,31 @@
             <p>Рисунок 2 - Граф</p>
         </div>
         %if num_cliques > 0:
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                    %for i in range(num_cliques):
-                        %if i == 0:
-                            <div class="item active">
-                                <img src="data:image/png;base64,{{ subgraphs[i] }}" alt="{{i+1}} slide">
-                            </div>
-                        %else:
-                            <div class="item">
-                                <img src="data:image/png;base64,{{ subgraphs[i] }}" alt="{{i+1}} slide">
-                            </div>
+            %if is_subgraph_draw:
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        %for i in range(num_cliques):
+                            %if i == 0:
+                                <div class="item active">
+                                    <img src="data:image/png;base64,{{ subgraphs[i] }}" alt="{{i+1}} slide">
+                                </div>
+                            %else:
+                                <div class="item">
+                                    <img src="data:image/png;base64,{{ subgraphs[i] }}" alt="{{i+1}} slide">
+                                </div>
+                            %end
                         %end
-                    %end
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+            %end
         
             <details>
                 <summary>Найдено подграфов: {{num_cliques}}</summary>

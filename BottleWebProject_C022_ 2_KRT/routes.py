@@ -27,7 +27,8 @@ def contact():
         num_cliques=-1,
         main_graph='',
         subgraphs=[],
-        is_valid_graph=False
+        is_valid_graph=False,
+        is_subgraph_draw=True
     )
 
 @route('/method_max_connections')

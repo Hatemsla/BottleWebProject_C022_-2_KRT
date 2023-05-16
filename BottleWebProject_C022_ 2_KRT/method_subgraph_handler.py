@@ -10,6 +10,7 @@ graph_count = subgraph_count = 0
 prev_graph_count = 0
 graph_data = []
 main_graph = ''
+is_subgraph_draw = True
 
 
 def adjacency_matrix_to_graph(adj_matrix):
@@ -78,11 +79,14 @@ def get_form_graph_data(graph_count):
     return graph_data
             
 
-def calculate_subgraph_count(graph_count, subgraph_count, main_graph):
+def calculate_subgraph_count(graph_count, subgraph_count, main_graph, is_subgraph_draw):
     """Функция для подсчета количества подграфов в графе заданного пользователем"""
     graph = adjacency_matrix_to_graph(graph_data)
     num_cliques, cliques = find_cliques(graph, subgraph_count)
-    subgraphs = get_subgraphs_image64(graph_data, cliques)
+    if is_subgraph_draw:
+        subgraphs = get_subgraphs_image64(graph_data, cliques)
+    else:
+        subgraphs = []
     cliques.sort(key=lambda x: x[0])
 
     return dict(
@@ -94,15 +98,19 @@ def calculate_subgraph_count(graph_count, subgraph_count, main_graph):
         num_cliques=num_cliques,
         main_graph=main_graph,
         subgraphs=subgraphs,
-        is_valid_graph=is_valid_graph(graph_data)
+        is_valid_graph=is_valid_graph(graph_data),
+        is_subgraph_draw=is_subgraph_draw
     )
 
 
-def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph):
+def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_subgraph_draw):
     """Функция для подсчета количества подграфов в случайно заданном графе"""
     graph = adjacency_matrix_to_graph(graph_data)
     num_cliques, cliques = find_cliques(graph, subgraph_count)
-    subgraphs = get_subgraphs_image64(graph_data, cliques)
+    if is_subgraph_draw:
+        subgraphs = get_subgraphs_image64(graph_data, cliques)
+    else:
+        subgraphs = []
     cliques.sort(key=lambda x: x[0])
 
     return dict(
@@ -114,7 +122,8 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph):
         num_cliques=num_cliques,
         main_graph=main_graph,
         subgraphs=subgraphs,
-        is_valid_graph=is_valid_graph(graph_data)
+        is_valid_graph=is_valid_graph(graph_data),
+        is_subgraph_draw=is_subgraph_draw
     )
     
 
@@ -227,11 +236,12 @@ def is_valid_graph(graph_data):
 @view('method_subgraph')
 def form_handler():
     """Функция обработчик формы на сайта"""
-    global graph_count, subgraph_count, graph_data, prev_graph_count, main_graph
+    global graph_count, subgraph_count, graph_data, prev_graph_count, main_graph, is_subgraph_draw
 
     if request.forms.get("form") == "Send1":
         graph_count = int(request.forms.get('graph_count'))
         subgraph_count = int(request.forms.get('subgraph_count'))
+        is_subgraph_draw = bool(request.forms.get('is_subgraph_draw'))
         
         if prev_graph_count != graph_count:
             graph_data = []     
@@ -247,22 +257,24 @@ def form_handler():
             num_cliques=-1,
             main_graph='',
             subgraphs=[],
-            is_valid_graph=False
+            is_valid_graph=False,
+            is_subgraph_draw=True
         )
     elif request.forms.get("form") == "Confirm":
         graph_data = get_form_graph_data(graph_count)
         
         main_graph = get_graph_image64(graph_data)
         
-        return calculate_subgraph_count(graph_count, subgraph_count, main_graph)
+        return calculate_subgraph_count(graph_count, subgraph_count, main_graph, is_subgraph_draw)
     elif request.forms.get("form") == "Random":
         graph_count = int(request.forms.get('graph_count'))
         subgraph_count = int(request.forms.get('subgraph_count'))
+        is_subgraph_draw = bool(request.forms.get('is_subgraph_draw'))
 
         graph_data = generate_adjacency_matrix(graph_count, 0.6)
         
         main_graph = get_graph_image64(graph_data)
         
-        return calculate_random_subgraph_count(graph_data, subgraph_count, main_graph)
+        return calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_subgraph_draw)
     else:
         pass
