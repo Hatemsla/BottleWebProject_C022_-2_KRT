@@ -12,7 +12,6 @@ graph_data = []
 main_graph = ''
 
 
-
 def adjacency_matrix_to_graph(adj_matrix):
     """Функция для преоброзования таблицы смежности графа в словарь, где ключи - номера нод, а значения списки соединений"""
     graph = {}
@@ -94,7 +93,8 @@ def calculate_subgraph_count(graph_count, subgraph_count, main_graph):
         cliques=cliques,
         num_cliques=num_cliques,
         main_graph=main_graph,
-        subgraphs=subgraphs
+        subgraphs=subgraphs,
+        is_valid_graph=is_valid_graph(graph_data)
     )
 
 
@@ -113,7 +113,8 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph):
         cliques=cliques,
         num_cliques=num_cliques,
         main_graph=main_graph,
-        subgraphs=subgraphs
+        subgraphs=subgraphs,
+        is_valid_graph=is_valid_graph(graph_data)
     )
     
 
@@ -171,10 +172,12 @@ def get_subgraph_images(edges, cliques):
     bufs = []
     
     for clique in cliques:
+        edges_to_color = [(u, v) for u, v in G.edges() if u in clique and v in clique]
         pos = nx.circular_layout(G)
         node_colors = ['red' if node in clique else 'green' for node in G.nodes()]
         nx.draw_networkx_nodes(G, pos, node_color=node_colors)
-        nx.draw_networkx_edges(G, pos)
+        nx.draw_networkx_edges(G, pos, edgelist=edges_to_color, edge_color='red')  # Установите желаемый цвет для ребер
+        nx.draw_networkx_edges(G, pos, edgelist=[edge for edge in G.edges() if edge not in edges_to_color], edge_color='black')  # Рисуем остальные ребра
         nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif")
         buf = io.BytesIO()
         plt.box(False)
@@ -209,6 +212,16 @@ def get_subgraphs_image64(graph_data, cliques):
     return subgraph
 
 
+def is_valid_graph(graph_data):
+    """Функция проверяющая правильность таблицы смежности графа"""
+    for i in range(len(graph_data)):
+        for j in range(i + 1, len(graph_data)):
+            if graph_data[i][j] != graph_data[j][i]:
+                return False
+            
+    return True
+
+
 @post('/method_subgraph')
 @route('/method_subgraph')
 @view('method_subgraph')
@@ -233,7 +246,8 @@ def form_handler():
             cliques=[],
             num_cliques=-1,
             main_graph='',
-            subgraphs=[]
+            subgraphs=[],
+            is_valid_graph=False
         )
     elif request.forms.get("form") == "Confirm":
         graph_data = get_form_graph_data(graph_count)
