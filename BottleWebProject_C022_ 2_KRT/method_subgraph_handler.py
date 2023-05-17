@@ -223,12 +223,13 @@ def get_subgraphs_image64(graph_data, cliques):
 
 def is_valid_graph(graph_data):
     """Функция проверяющая правильность таблицы смежности графа"""
+    
     for i in range(len(graph_data)):
         for j in range(i + 1, len(graph_data)):
             if graph_data[i][j] != graph_data[j][i]:
                 return False
             
-    return True
+    return not all(value == 0 for sublist in graph_data for value in sublist)
 
 
 @post('/method_subgraph')
@@ -264,7 +265,7 @@ def form_handler():
         graph_data = get_form_graph_data(graph_count)
         
         main_graph = get_graph_image64(graph_data)
-        
+
         return calculate_subgraph_count(graph_count, subgraph_count, main_graph, is_subgraph_draw)
     elif request.forms.get("form") == "Random":
         graph_count = int(request.forms.get('graph_count'))
