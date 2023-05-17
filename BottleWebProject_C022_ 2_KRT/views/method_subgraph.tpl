@@ -2,6 +2,10 @@
 
 <link rel="stylesheet" type="text/css" href="/static/content/method_subgraph.css" />
 
+<div class="background">
+  <img class="back_image" src="/static/images/graph_wallpaper1.jpg" />
+</div>
+
 <div class="wrapper">
     <div class="info-container">
         <div class="theory-container">

@@ -2,6 +2,10 @@
 
 <link rel="stylesheet" type="text/css" href="/static/content/method_max_connections.css" />
 
+<div class="background">
+  <img class="back_image" src="/static/images/graph_wallpaper2.jpg" />
+</div>
+
 <div class="wrapper">
     <div class="info-container">
         <h1>Требуется найти в графе вершины с наибольшим окружением</h1>
