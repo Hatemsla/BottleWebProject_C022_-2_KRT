@@ -17,12 +17,12 @@
          <img class="graph-image" src="/static/images/subgraph_image.png">
         </div>
         <p class="graph-image-text">Рисунок 1 – бебебе</p>
-        <p>Сайт выполняет следующие действия:
+        <h2>Сайт выполняет следующие действия:
         <ul>
             <li class="info-li">Вывод матрицы ограниченных достижимостей k-шага;</li>
             <li class="info-li">Вывод вершин с наибольшим окружением;</li>
         </ul>
-        </p>
+        </h2>
         <p>Чтобы приступить к работе, укажите размерность матрицы и шаг k;</p>
         <p>Заполните матрицу смежности вручную или воспользуйтесь кнопкой "заполнить случайно"</p>
         <p>Нажмите кнопку "Посчитать"</p>
@@ -79,6 +79,7 @@
                 <p class="confirm2"><button type="submit" name="form" value="Confirm2">Посчитать</button></p>
             </form>
         </div>
+        <p>&shy;</p>
         %if len(route_data) > 0:
         <div class="table-container">
             <form action="/method_max_connections" method="post">
@@ -114,6 +115,7 @@
                 <p>Вершины с наибольшим окружением: {{res}}</p>
             </form>
             </div>
+            <p>&shy;</p>
         %end
     %end
 </div>

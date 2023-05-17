@@ -4,20 +4,28 @@
     transition: 0.3s;
     padding: 2px 16px;
     width: 30%;
-    margin: 7px;
+    margin: 12px;
     justify-content: space-around;
     background: #c9e2b3;
+    min-height: 450px;
+    border-radius: 6px;
 }
 
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
+    transform: scale(1.1);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card:hover .inside{
+    transform: scale(0.9);
 }
 
 /* Add some padding inside the card container */
 .container {
     padding: 2px 16px;
+    justify-content: center;
 }
 
 .wrapper {
@@ -25,10 +33,16 @@
     box-shadow: 0px 0px 15px 4px #b3b3b3;
     margin: 50px auto 0;
     width: 100%;
+    border-radius: 8px;
+}
+
+.lead{
+    justify-content: left;
 }
 
 .info-container {
     padding: 20px;
+    justify-content: left;
 }
 
 .marketing .col-lg-4 {
@@ -61,4 +75,91 @@
   margin: auto;
   min-width: 50%;
   min-height: 50%;
+}
+
+/* Elements */
+h1{
+    font-family: 'Heebo', sans-serif;
+    font-weight: bold;
+    justify-content: left;
+}
+
+h2{
+    font-family: 'Heebo', sans-serif;
+    font-weight: bolder;
+}
+
+p{
+    font-family: 'Heebo', sans-serif;
+    justify-content: left;
+}
+
+.li{
+    font-family: 'Heebo', sans-serif;
+    justify-content: left;
+}
+
+.method-info{
+    font-family: 'Heebo', sans-serif;
+    font-size: 17px;
+    font-style: italic;
+}
+
+
+/* Buttons */
+.button-30 {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+  align-items: center;
+  appearance: none;
+    text-decoration: none;
+
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: initial;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: 'Heebo', sans-serif;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-30:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+/* Images */
+
+.card-image {
+    border-radius: 10px;
+    object-fit: contain;
+    max-width: 300px;
+    max-height: 230px;
 }
