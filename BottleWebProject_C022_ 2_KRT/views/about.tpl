@@ -1,6 +1,6 @@
 % rebase('layout.tpl', title=title, year=year)
 
-<link rel="stylesheet" href="/static/content/style_main_page.css">
+<link rel="stylesheet" href="/static/content/style_authors_page.css">
 <link rel="stylesheet" href="/static/content/font-awesome.css">
 
 
@@ -14,7 +14,7 @@
 	</head>
 
 	<body>
-		<div class="wrapper" style="margin-top:50px">
+		<div class="wrapper">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
