@@ -10,27 +10,28 @@
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <a href="/" class="navbar-brand">Графы</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/home">Задача</a></li>
-                    <li><a href="/method_subgraph">Метод 1</a></li>
-                    <li><a href="/method_max_connections">Метод 2</a></li>
-                    <li><a href="/method_eulerian_cycle">Метод 3</a></li>
+                    <li><a href="/method_subgraph">Поиск клики в графе</a></li>
+                    <li><a href="/method_max_connections">Поиск вершин с наибольшим окружением</a></li>
+                    <li><a href="/method_eulerian_cycle">Поиск эйлерова цикла</a></li>
                     <li><a href="/about">Авторы</a></li>
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
+    
 
     <div class="container body-content">
         {{!base}}

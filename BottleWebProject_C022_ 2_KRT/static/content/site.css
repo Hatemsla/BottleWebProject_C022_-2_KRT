@@ -40,3 +40,54 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.navbar {
+    background-color: #337ab7; /* Измените цвет фона навбара по вашему выбору */
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    text-decoration: none; /* Убираем подчеркивание у всех ссылок */
+    position: relative;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    background-color: transparent;
+    color: #ff9800;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover:after,
+.navbar-inverse .navbar-nav > li > a:focus:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px; /* Регулируйте здесь отступ нижнего подчеркивания */
+    height: 2px; /* Регулируйте здесь толщину нижнего подчеркивания */
+    background-color: transparent;
+    color: #ff9800;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover:after,
+.navbar-inverse .navbar-nav > li > a:focus:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px; /* Регулируйте здесь отступ нижнего подчеркивания */
+    height: 2px; /* Регулируйте здесь толщину нижнего подчеркивания */
+    background-color: #ff9800; /* Измените цвет нижнего подчеркивания по вашему выбору */
+}
