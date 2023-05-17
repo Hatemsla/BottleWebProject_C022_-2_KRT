@@ -1,4 +1,4 @@
-% rebase('layout.tpl', year=year, graph_count=graph_count, k_step=k_step, graph_data=graph_data, main_graph=main_graph, is_valid_graph=is_valid_graph, res=res)
+% rebase('layout.tpl', year=year, graph_count=graph_count, k_step=k_step, graph_data=graph_data, main_graph=main_graph, is_valid_graph=is_valid_graph, res=res, route_data=route_data)
 
 <link rel="stylesheet" type="text/css" href="/static/content/method_max_connections.css" />
 
@@ -63,9 +63,42 @@
                 </tbody>
             </table>
             <p class="confirm2"><button type="submit" name="form" value="Confirm2">Посчитать</button></p>
-        %if len(res) > 0:
-            <p>{{res}}</p>
-        %end
         </form>
     </div>
+    %if len(route_data) > 0:
+    <div class="table-container">
+        <form action="/method_max_connections" method="post">
+            <table name="limit_reachability" class="graph-table">
+                <caption>Матрица ограниченных достижимостей {{k_step}} - шага</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        %for i in range(int(graph_count)):
+                            <th>{{i+1}}</th>
+                        %end
+                    </tr>
+                </thead>
+                <tbody>
+                    %for i in range(int(graph_count)):
+                        <tr>
+                            <th>{{i+1}}</th>
+                            %for j in range(int(graph_count)):
+                                %if graph_data:
+                                    <td style="background-color: #DCDCDC;"><p>{{route_data[i][j]}}</p></td>
+                                %end
+                            %end
+                        </tr>
+                    %end
+                </tbody>
+            </table>
+        </form>
+    </div>
+    %end
+    %if len(res) > 1:
+        <div class="table-container">
+        <form action="/method_max_connections" method="post">
+            <p>Вершины с наибольшим окружением: {{res}}</p>
+        </form>
+        </div>
+    %end
 %end

@@ -3,38 +3,38 @@ from bottle import post, request, route, view
 from datetime import datetime
 import random
 
-vertices = []
+vertices = ''
 
-graph_count = k_step = 0
-prev_graph_count = 0
+graph_count = k_step = prev_graph_count = 0
 graph_data = []
 main_graph = ''
+route_data = []
 
 
 def find_max_degree_vertices(graph, k):
-    global vertices
+    global vertices, route_data
     relat_matrix = np.array(graph)
-    A = np.array(graph)
+    route_data = np.array(graph)
 
     # вычисление булевой степени матрицы смежности и суммирование с таблицей достижимостей
     for i in range(2, k+1):
         l = np.linalg.matrix_power(relat_matrix.astype(bool), i)
         l = l.astype(int)
-        A = np.add(A, l)
+        route_data = np.add(route_data, l)
 
     n = len(graph)
-    A = A.astype(bool)
-    A = A.astype(int)
+    route_data = route_data.astype(bool)
+    route_data = route_data.astype(int)
 
     max_sum = 0
-    for row in A:
+    for row in route_data:
         row_sum = max(0, sum(row))
         max_sum = max(max_sum, row_sum)
 
-    vertices = []
+    vertices = ''
     for i in range(n):
-        if sum(A[i]) == max_sum:
-            vertices.append(i+1)
+        if sum(route_data[i]) == max_sum:
+            vertices += str(i + 1) + ' '
 
     return dict(
         year=datetime.now().year,
@@ -43,7 +43,8 @@ def find_max_degree_vertices(graph, k):
         graph_data=graph_data,
         main_graph='',
         is_valid_graph=False,
-        res=vertices
+        res=vertices,
+        route_data=route_data
     )
 
 
@@ -93,8 +94,9 @@ def generate_adjacency_matrix(n, p):
 @view('method_max_connections')
 def form_handler():
     """Функция обработчик формы на сайта"""
-    global graph_count, k_step, graph_data, prev_graph_count, main_graph, vertices
-
+    global graph_count, k_step, graph_data, prev_graph_count, main_graph, vertices, route_data
+    route_data = []
+    vertices = ''
     if request.forms.get("form") == "Send2":
         graph_count = int(request.forms.get('graph_count'))
         k_step = int(request.forms.get('k_step'))
@@ -111,7 +113,8 @@ def form_handler():
             graph_data=graph_data,
             main_graph='',
             is_valid_graph=False,
-            res=vertices
+            res=vertices,
+            route_data=route_data
         )
     elif request.forms.get("form") == "Confirm2":
         graph_data = get_form_graph_data(graph_count)
@@ -121,8 +124,6 @@ def form_handler():
         return find_max_degree_vertices(graph_data, k_step)
     elif request.forms.get("form") == "Random2":
         graph_count = int(request.forms.get('graph_count'))
-        k_step = int(request.forms.get('k_step'))
-
         graph_data = generate_adjacency_matrix(graph_count, 0.6)
 
         # main_graph = get_graph_image64(graph_data)
@@ -134,7 +135,8 @@ def form_handler():
             graph_data=graph_data,
             main_graph='',
             is_valid_graph=False,
-            res=vertices
+            res=vertices,
+            route_data=route_data
         )
     else:
         pass
