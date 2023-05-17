@@ -1,8 +1,18 @@
 import numpy as np
 from bottle import post, request, route, view
+from datetime import datetime
+import random
+
+vertices = []
+
+graph_count = k_step = 0
+prev_graph_count = 0
+graph_data = []
+main_graph = ''
 
 
 def find_max_degree_vertices(graph, k):
+    global vertices
     relat_matrix = np.array(graph)
     A = np.array(graph)
 
@@ -16,39 +26,78 @@ def find_max_degree_vertices(graph, k):
     A = A.astype(bool)
     A = A.astype(int)
 
-    print(A)
-
     max_sum = 0
     for row in A:
         row_sum = max(0, sum(row))
         max_sum = max(max_sum, row_sum)
 
+    vertices = []
     for i in range(n):
         if sum(A[i]) == max_sum:
-            print(i+1)
+            vertices.append(i+1)
+
+    return dict(
+        year=datetime.now().year,
+        graph_count=f'{graph_count}',
+        k_step=f'{k_step}',
+        graph_data=graph_data,
+        main_graph='',
+        is_valid_graph=False,
+        res=vertices
+    )
 
 
-find_max_degree_vertices([[0, 1, 1, 0, 0, 1, 1, 0],
-                          [1, 0, 1, 0, 0, 0, 0, 0],
-                          [1, 1, 0, 0, 0, 1, 1, 0],
-                          [0, 0, 0, 0, 0, 0, 1, 0],
-                          [0, 0, 0, 0, 0, 1, 1, 1],
-                          [1, 0, 1, 0, 1, 0, 0, 0],
-                          [1, 0, 1, 1, 1, 0, 0, 0],
-                          [0, 0, 0, 0, 1, 0, 0, 0]], 3)
+
+# find_max_degree_vertices([[0, 1, 1, 0, 0, 1, 1, 0],
+#                           [1, 0, 1, 0, 0, 0, 0, 0],
+#                           [1, 1, 0, 0, 0, 1, 1, 0],
+#                           [0, 0, 0, 0, 0, 0, 1, 0],
+#                           [0, 0, 0, 0, 0, 1, 1, 1],
+#                           [1, 0, 1, 0, 1, 0, 0, 0],
+#                           [1, 0, 1, 1, 1, 0, 0, 0],
+#                           [0, 0, 0, 0, 1, 0, 0, 0]], 3)
 
 
-@post('/method_max_con')
-@route('/method_max_con')
-@view('method_max_con')
+def get_form_graph_data(graph_c):
+    """Функция для получения данных о графе с таблицы смежности"""
+    graph_data = []
+    for i in range(graph_c):
+        ls = []
+        for j in range(graph_c):
+            ls.append(int(request.forms.get(f"{i}{j}g")))
+        graph_data.append(ls)
+
+    return graph_data
+
+
+def generate_adjacency_matrix(n, p):
+    """
+    Функция генерирует матрицу смежности неориентированного графа
+    с n вершинами и вероятностью ребра p.
+    """
+    # Создаем пустую матрицу смежности n x n.
+    matrix = [[0 for i in range(n)] for j in range(n)]
+
+    # Заполняем матрицу смежности случайными значениями.
+    for i in range(n):
+        for j in range(i + 1, n):
+            if random.random() < p:
+                matrix[i][j] = 1
+                matrix[j][i] = 1
+
+    return matrix
+
+
+@post('/method_max_connections')
+@route('/method_max_connections')
+@view('method_max_connections')
 def form_handler():
     """Функция обработчик формы на сайта"""
-    global graph_count, subgraph_count, graph_data, prev_graph_count, main_graph, is_subgraph_draw
+    global graph_count, k_step, graph_data, prev_graph_count, main_graph, vertices
 
-    if request.forms.get("form") == "Send1":
+    if request.forms.get("form") == "Send2":
         graph_count = int(request.forms.get('graph_count'))
-        subgraph_count = int(request.forms.get('subgraph_count'))
-        is_subgraph_draw = bool(request.forms.get('is_subgraph_draw'))
+        k_step = int(request.forms.get('k_step'))
 
         if prev_graph_count != graph_count:
             graph_data = []
@@ -56,33 +105,37 @@ def form_handler():
         prev_graph_count = graph_count
 
         return dict(
-            graph_count=f'{graph_count}',
-            subgraph_count=f'{subgraph_count}',
             year=datetime.now().year,
+            graph_count=f'{graph_count}',
+            k_step=f'{k_step}',
             graph_data=graph_data,
-            cliques=[],
-            num_cliques=-1,
             main_graph='',
-            subgraphs=[],
             is_valid_graph=False,
-            is_subgraph_draw=True
+            res=vertices
         )
-    elif request.forms.get("form") == "Confirm":
+    elif request.forms.get("form") == "Confirm2":
         graph_data = get_form_graph_data(graph_count)
 
-        main_graph = get_graph_image64(graph_data)
+        # main_graph = get_graph_image64(graph_data)
 
-        return calculate_subgraph_count(graph_count, subgraph_count, main_graph, is_subgraph_draw)
-    elif request.forms.get("form") == "Random":
+        return find_max_degree_vertices(graph_data, k_step)
+    elif request.forms.get("form") == "Random2":
         graph_count = int(request.forms.get('graph_count'))
-        subgraph_count = int(request.forms.get('subgraph_count'))
-        is_subgraph_draw = bool(request.forms.get('is_subgraph_draw'))
+        k_step = int(request.forms.get('k_step'))
 
         graph_data = generate_adjacency_matrix(graph_count, 0.6)
 
-        main_graph = get_graph_image64(graph_data)
+        # main_graph = get_graph_image64(graph_data)
 
-        return calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_subgraph_draw)
+        return dict(
+            year=datetime.now().year,
+            graph_count=f'{graph_count}',
+            k_step=f'{k_step}',
+            graph_data=graph_data,
+            main_graph='',
+            is_valid_graph=False,
+            res=vertices
+        )
     else:
         pass
 

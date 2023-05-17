@@ -31,15 +31,21 @@ def contact():
         is_subgraph_draw=True
     )
 
+
 @route('/method_max_connections')
 @view('method_max_connections')
 def contact():
     """Renders the method max connections page."""
     return dict(
-        title='Method max connections',
-        message='Your method max connections page.',
-        year=datetime.now().year
+        year=datetime.now().year,
+        graph_count='0',
+        k_step='0',
+        graph_data=[],
+        main_graph='',
+        is_valid_graph=False,
+        res=[]
     )
+
 
 @route('/method_eulerian_cycle')
 @view('method_eulerian_cycle')
