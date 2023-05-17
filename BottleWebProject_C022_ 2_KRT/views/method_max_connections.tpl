@@ -3,17 +3,23 @@
 <link rel="stylesheet" type="text/css" href="/static/content/method_max_connections.css" />
 
 <h1>Требуется найти в графе вершины с наибольшим окружением</h1>
-<p>бубубу</p>
+<p>Реализация алгоритма поиска в графе вершин, имеющих наибольшее окружение.</p>
+<p>Вычисляются последовательно степени матрицы смежности A2, А3, …, Ak и соответствующие им матрицы ограниченных достижимостей R2, R3, …, Rk.</p>
+<p>k – максимальное количество ярусов, задаваемое пользователем.</p>
+<p></p>
 <div>
  <img class="graph-image" src="/static/images/subgraph_image.png">
 </div>
 <p class="graph-image-text">Рисунок 1 – бебебе</p>
-<p>Созданная программа должна выполнять следующие действия:
+<p>Сайт выполняет следующие действия:
 <ul>
     <li class="info-li">Вывод матрицы ограниченных достижимостей k-шага;</li>
     <li class="info-li">Вывод вершин с наибольшим окружением;</li>
 </ul>
 </p>
+<p>Чтобы приступить к работе, укажите размерность матрицы и шаг k;</p>
+<p>Заполните матрицу смежности вручную или воспользуйтесь кнопкой "заполнить случайно"</p>
+<p>Нажмите кнопку "Посчитать"</p>
 <div class="form-container">
     <form action="/method_max_connections" method="post">
         <div class="form-input">
@@ -26,7 +32,7 @@
         </div>
         <div class="form-buttons">
             <button type="submit" name="form" value="Send2">Построить матрицу</button>
-            <button type="submit" name="form" value="Random2">Случайная матрица</button>
+            <button type="submit" name="form" value="Random2">Заполнить случайно</button>
         </div>
     </form>
 </div>
@@ -34,7 +40,7 @@
     <div class="table-container">
         <form action="/method_max_connections" method="post">
             <table name="graph_data" class="graph-table">
-                <caption>Таблица смежности графа</caption>
+                <caption>Таблица смежности графа:</caption>
                 <thead>
                     <tr>
                         <th></th>
