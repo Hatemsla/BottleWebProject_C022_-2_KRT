@@ -82,6 +82,7 @@
             </div>
         </form>
     </div>
+    <p>&shy;</p>
     %if int(graph_count) > 0:
         <div class="table-container">
             <form action="/method_subgraph" method="post">

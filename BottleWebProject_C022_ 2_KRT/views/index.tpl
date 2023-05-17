@@ -1,29 +1,35 @@
 % rebase('layout.tpl', title='Home Page', year=year)
 
+<link rel="stylesheet" type="text/css" href="/static/content/main_page.css" />
+
+
 <div class="jumbotron">
-    <h1>Bottle</h1>
-    <p class="lead">Bottle is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://bottlepy.org/docs/dev/index.html" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    <h1>Элементы теории графов. Неориентированные графы. Эйлеровы графы.</h1>
+    <p class="lead">
+
+    </p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+    <div class="card col-md-4">
+        <h2>Поиск подграфов в графе</h2>
         <p>
-            Bottle gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            дд
         </p>
-        <p><a class="btn btn-default" href="http://bottlepy.org/docs/dev/index.html">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="/method_subgraph">Перейти &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
+    <div class="card col-md-4">
+        <h2>Поиск вершин с наибольшим окружением</h2>
+        <p>
+            дд
+        </p>
+        <p><a class="btn btn-default" href="/method_max_connections">Перейти &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
+    <div class="card col-md-4">
+        <h2>Поиск Эйлерова цикла</h2>
+        <p>
+            дд
+        </p>
+        <p><a class="btn btn-default" href="/method_eulerian_cycle">Перейти &raquo;</a></p>
     </div>
 </div>
