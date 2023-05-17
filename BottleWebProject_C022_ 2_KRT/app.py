@@ -6,6 +6,8 @@ import bottle
 import os
 import sys
 import method_subgraph_handler
+import method_max_connections_handler
+import method_eulerian_cycle_handler
 
 # routes contains the HTTP handlers for our server and must be imported.
 import routes
