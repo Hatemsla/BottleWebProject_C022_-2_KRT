@@ -4,23 +4,64 @@
 
 <div class="wrapper">
     <div class="info-container">
-        <h1>Требуется найти заданный подграф в данном графе</h1>
-        <p>Например, заданный подграф представляет собой полный граф из пяти вершин, степень каждой из которых равна четырем. На рисунке 1 представлены диаграмма подграфа и соответствующая ему матрица смежности вершин.</p>
-        <div>
-            <img class="graph-image" src="/static/images/subgraph_image.png">
+        <div class="theory-container">
+            <h1>Требуется найти заданную клику в заданном графе</h1>
+            <p>Например, заданный подграф представляет собой полный граф из пяти вершин, степень каждой из которых равна четырем. На рисунке 1 представлены диаграмма подграфа и соответствующая ему матрица смежности вершин.</p>
+            <div>
+                <img class="graph-image" src="/static/images/subgraph_image.png">
+            </div>
+            <p class="graph-image-text">Рисунок 1 – Заданный фрагмент и его матрица смежности</p>
+            <p>Программа выполняет следующие действия:
+                <ul>
+                    <li class="info-li">Поиск всех имеющихся заданных клик в заданном графе;</li>
+                    <li class="info-li">Вывод всех найденных клик в виде списка вершин и построенного графа с выделением найденной клики.</li>
+                </ul>
+            </p>
+            <p><strong>Кликой</strong> неориентированного графа называется подмножество его вершин, любые две из которых соединены ребром.</p>
+            <p><strong>Главной диагональю</strong> квадратной матрицы называют элементы, имеющие одинаковые индексы, то есть те элементы, у которых номер строки совпадает с номером столбца.</p>
+            <div>
+                <img class="graph-image" src="/static/images/main_diagonal.png">
+            </div>
+            <p class="graph-image-text">Рисунок 2 – Главная диагональ на матрице</p>
         </div>
-        <p class="graph-image-text">Рисунок 1 – Заданный фрагмент и его матрица смежности</p>
-        <p>Созданная программа должна выполнять следующие действия:
-        <ul>
-            <li class="info-li">Поиск всех имеющихся заданных подграфов в исходном графе;</li>
-            <li class="info-li">Вывод всех найденных подграфов в виде списка вершин.</li>
-        </ul>
-        </p>
+        <div class="input-info-container">
+            <h2>Входные данные</h2>
+            <p>Форма ввода в качестве входных значений принимает 3 параметра: 
+                <ol>
+                    <li class="info-li"><strong>Количество вершин графа;</strong></li>
+                    <li class="info-li"><strong>Размер клики;</strong></li>
+                    <li class="info-li"><strong>Флаг отрисовки найденных клик в графе.</strong></li>
+                </ol>
+            </p>
+            <p>
+                Поля ввода ограничены диапазоном значений от 2 до 20 включительно, в случае ввода некорректных значений, будет выведено соответствующее сообщение.
+            </p>
+            <p>
+                Также на форме присутствуют две кнопки:
+                <ul>
+                    <li class="info-li"><strong>Кнопка "Построить матрицу"</strong> - отвечает за построение таблицы смежности графа;</li>
+                    <li class="info-li"><strong>Кнопка "Случайная матрица"</strong> - отвечает за построение матрицы смежности графа, заполением ее случайными значениями от 0 до 1 и нахождением клики в графе.</li>
+                </ul>
+            </p>
+            <p>После построения таблицы смежности графа, пользователь может самостоятельно заполнить таблицу данными.</p>
+            <p>Поля ввода таблицы смежности ограничены в вводе, можно ввести только 0 или 1, также данные должны быть симметричными относительно главной диагонали, так как граф неорентировнный. В случае ввода некорекктных значений будет выведно соответсвующее сообщение.</p>
+        </div>
+        <div class="output-info-container">
+            <h2>Выходные данные</h2>
+            <p>
+                В качестве выходных данных, будет выведено:
+                <ol>
+                    <li class="info-li"><strong>Отрисованный граф;</strong></li>
+                    <li class="info-li"><strong>Выделенные найденные клики в графе (если выбран фдаг отрисовки);</strong></li>
+                    <li class="info-li"><strong>Список с найденными кликами.</strong></li>
+                </ol> 
+            </p>
+        </div>
     </div>
     <div class="form-container">
         <form action="/method_subgraph" method="post">
             <div class="form-input">
-                <label for="graph_count">Введите количество графов:</label>
+                <label for="graph_count">Введите количество вершин графа:</label>
                 <input type="number" id="graph_count" value="{{graph_count}}" required min="2" max="20" pattern="[0-9]+" name="graph_count" placeholder="Размер матрицы смежности графа">
             </div>
             <div class="form-input">
@@ -28,7 +69,7 @@
                 <input type="number" id="subgraph_count" value="{{subgraph_count}}" required min="2" max="20" pattern="[0-9]+" name="subgraph_count" placeholder="Размер клики">
             </div>
             <div class="form-input">
-                <label for="subgraph_count">Рисовать подграфы:</label>
+                <label for="subgraph_count">Рисовать найденные клики:</label>
                 %if is_subgraph_draw:
                     <input type="checkbox" id="subgraph_count" name="is_subgraph_draw" checked>
                 %else:
@@ -81,7 +122,7 @@
         <div class="result-container">
             <div class="graph-container">
                 <img src="data:image/png;base64,{{ main_graph }}"/>
-                <p>Рисунок 2 - Граф</p>
+                <p>Рисунок 3 - Отрисованный граф</p>
             </div>
             %if num_cliques > 0:
                 %if is_subgraph_draw:

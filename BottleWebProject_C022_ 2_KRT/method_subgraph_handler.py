@@ -164,7 +164,7 @@ def get_graph_image(edges):
     pos = nx.circular_layout(G)
     nx.draw_networkx_nodes(G, pos, node_color='green')
     nx.draw_networkx_edges(G, pos)
-    nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif")
+    nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif", font_color='white')
     buf = io.BytesIO()
     plt.box(False)
     plt.savefig(buf, format='png')
@@ -187,7 +187,7 @@ def get_subgraph_images(edges, cliques):
         nx.draw_networkx_nodes(G, pos, node_color=node_colors)
         nx.draw_networkx_edges(G, pos, edgelist=edges_to_color, edge_color='red')  # Установите желаемый цвет для ребер
         nx.draw_networkx_edges(G, pos, edgelist=[edge for edge in G.edges() if edge not in edges_to_color], edge_color='black')  # Рисуем остальные ребра
-        nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif")
+        nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif", font_color='white')
         buf = io.BytesIO()
         plt.box(False)
         plt.savefig(buf, format='png')
