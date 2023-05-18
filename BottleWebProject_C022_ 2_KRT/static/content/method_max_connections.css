@@ -5,7 +5,7 @@
     justify-content: center;
     margin: auto auto 20px;
     max-width: 700px;
-    background-color: #D8BFD8;
+    background-color: #F8F8F8;
     border: 1px solid #CCC;
     padding: 20px;
     border-radius: 5px;
@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     margin: 15px;
-    background-color: #D8BFD8;
+    background-color: #F8F8F8;
     border: 1px solid #CCC;
     padding: 20px;
     border-radius: 5px;
@@ -101,6 +101,7 @@ button:hover {
 .table-container {
     margin-top: 20px;
     margin-bottom: 20px;
+    background: #F8F8F8;
 }
 
 .graph-table {
@@ -168,6 +169,7 @@ button:hover {
 
 .result-container {
     margin-top: 20px;
+    background: #F8F8F8;
 }
 
     .result-container p {
@@ -216,14 +218,23 @@ summary{
 
 
 .wrapper {
-    background-color: #E6E6FA;
+    background-color: #337ab7;
     box-shadow: 0px 0px 15px 4px #b3b3b3;
     margin: 50px auto 0;
     width: 100%;
-    border-radius: 8px;
+    border: 1px solid #fff;
+    border-radius: 10px;
 }
 
 .info-container {
+    background-color: white;
+    box-shadow: 0 0 15px 4px #b3b3b3;
+    margin: 20px;
+    width: 95%;
+    height: 100%;
+    justify-content: center;
+    border: 1px solid #fff;
+    border-radius: 10px;
     padding: 20px;
 }
 
@@ -252,12 +263,12 @@ p{
 }
 h1{
     font-family: 'Heebo', sans-serif;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 h2{
     font-family: 'Heebo', sans-serif;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 li{

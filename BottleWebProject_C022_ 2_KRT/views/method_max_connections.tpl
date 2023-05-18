@@ -7,6 +7,7 @@
 </div>
 
 <div class="wrapper">
+    <p>&shy;</p>
     <div class="info-container">
         <h1>Требуется найти в графе вершины с наибольшим окружением</h1>
         <p>Реализация алгоритма поиска в графе вершин, имеющих наибольшее окружение.</p>
@@ -27,24 +28,24 @@
         <p>Заполните матрицу смежности вручную или воспользуйтесь кнопкой "заполнить случайно"</p>
         <p>Нажмите кнопку "Посчитать"</p>
     </div>
-    <div class="form-container">
-        <form action="/method_max_connections" method="post">
-            <div class="form-input">
-                <label for="graph_count">Введите размерность графа:</label>
-                <input type="number" id="graph_count" value="{{graph_count}}" required min="2" max="20" pattern="[0-9]+" name="graph_count" placeholder="Размер матрицы смежности графа">
-            </div>
-            <div class="form-input">
-                <label for="k_step">Введите количество ярусов:</label>
-                <input type="number" id="k_step" value="{{k_step}}" required min="1" max="5" pattern="[0-9]+" name="k_step" placeholder="Глубина шага k">
-            </div>
-            <div class="form-buttons">
-                <button type="submit" name="form" value="Send2">Построить матрицу</button>
-                <button type="submit" name="form" value="Random2">Заполнить случайно</button>
-            </div>
-        </form>
-    </div>
-    <p>&shy;</p>
-    %if int(graph_count) > 0:
+    <div class="info-container">
+        <div class="form-container">
+            <form action="/method_max_connections" method="post">
+                <div class="form-input">
+                    <label for="graph_count">Введите размерность графа:</label>
+                    <input type="number" id="graph_count" value="{{graph_count}}" required min="2" max="20" pattern="[0-9]+" name="graph_count" placeholder="Размер матрицы смежности графа">
+                </div>
+                <div class="form-input">
+                    <label for="k_step">Введите количество ярусов:</label>
+                    <input type="number" id="k_step" value="{{k_step}}" required min="1" max="5" pattern="[0-9]+" name="k_step" placeholder="Глубина шага k">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" name="form" value="Send2">Построить матрицу</button>
+                    <button type="submit" name="form" value="Random2">Заполнить случайно</button>
+                </div>
+            </form>
+        </div>
+        %if int(graph_count) > 0:
         <div class="table-container">
             <form action="/method_max_connections" method="post">
                 <table name="graph_data" class="graph-table">
@@ -79,43 +80,46 @@
                 <p class="confirm2"><button type="submit" name="form" value="Confirm2">Посчитать</button></p>
             </form>
         </div>
-        <p>&shy;</p>
-        %if len(route_data) > 0:
-        <div class="table-container">
-            <form action="/method_max_connections" method="post">
-                <table name="limit_reachability" class="graph-table">
-                    <caption>Матрица ограниченных достижимостей {{k_step}} - шага</caption>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            %for i in range(int(graph_count)):
-                                <th>{{i+1}}</th>
-                            %end
-                        </tr>
-                    </thead>
-                    <tbody>
-                        %for i in range(int(graph_count)):
-                            <tr>
-                                <th>{{i+1}}</th>
-                                %for j in range(int(graph_count)):
-                                    %if graph_data:
-                                        <td style="background-color: #DCDCDC;"><p>{{route_data[i][j]}}</p></td>
+        %end
+    </div>
+    %if len(route_data) > 0:
+        <div class="info-container">
+                <div class="table-container">
+                    <form action="/method_max_connections" method="post">
+                        <table name="limit_reachability" class="graph-table">
+                            <caption>Матрица ограниченных достижимостей {{k_step}} - шага</caption>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    %for i in range(int(graph_count)):
+                                        <th>{{i+1}}</th>
                                     %end
+                                </tr>
+                            </thead>
+                            <tbody>
+                                %for i in range(int(graph_count)):
+                                    <tr>
+                                        <th>{{i+1}}</th>
+                                        %for j in range(int(graph_count)):
+                                            %if graph_data:
+                                                <td style="background-color: #DCDCDC;"><p>{{route_data[i][j]}}</p></td>
+                                            %end
+                                        %end
+                                    </tr>
                                 %end
-                            </tr>
-                        %end
-                    </tbody>
-                </table>
-            </form>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+
+            %if len(res) > 1:
+                <div class="table-container">
+                    <form action="/method_max_connections" method="post">
+                        <p>Вершины с наибольшим окружением: {{res}}</p>
+                    </form>
+                </div>
+            %end
         </div>
         %end
-        %if len(res) > 1:
-            <div class="table-container">
-            <form action="/method_max_connections" method="post">
-                <p>Вершины с наибольшим окружением: {{res}}</p>
-            </form>
-            </div>
-            <p>&shy;</p>
-        %end
-    %end
+    <p>&shy;</p>
 </div>

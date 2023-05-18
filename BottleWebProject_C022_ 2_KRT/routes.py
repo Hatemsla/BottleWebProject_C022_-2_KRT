@@ -44,7 +44,7 @@ def contact():
         main_graph='',
         is_valid_graph=False,
         res='',
-        route_data=[[]]
+        route_data=[]
     )
 
 
