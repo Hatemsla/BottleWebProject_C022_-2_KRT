@@ -58,7 +58,7 @@
 						<div class="container">
 							<div class="carousel-caption">
 								<h1>Наша команда</h1>
-								<p>Любит всячески равзлекаться, вкусно кушать и ходить на страшные квесты.</p>
+								<p>Любит всячески развлекаться, вкусно кушать и ходить на страшные квесты.</p>
 								<p><a class="btn btn-lg btn-primary button-bot" href="https://github.com/kirushaaxd" role="button">Кирилл</a></p>
 							</div>
 						</div>
