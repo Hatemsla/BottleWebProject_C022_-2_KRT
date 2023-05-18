@@ -1,6 +1,6 @@
 import random
 from bottle import request
-from static.classes.EulerGraph import EulerGraph
+from static.model.EulerGraph import EulerGraph
 from datetime import date
 
 
