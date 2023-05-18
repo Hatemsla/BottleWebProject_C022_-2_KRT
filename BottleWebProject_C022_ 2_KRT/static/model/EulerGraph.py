@@ -1,3 +1,5 @@
+import copy
+
 class EulerGraph:
     """Класс содержащий метод поиска цикла Эйлера"""
 
@@ -27,7 +29,8 @@ class EulerGraph:
         return False
 
     @staticmethod
-    def find_euler_cycle(adjacency_matrix):
+    def find_euler_cycle(matrix):
+        adjacency_matrix = copy.deepcopy(matrix)
         if not EulerGraph.is_eulerian_graph(adjacency_matrix) or not EulerGraph.is_empty_graph(adjacency_matrix):
             return False, []
 

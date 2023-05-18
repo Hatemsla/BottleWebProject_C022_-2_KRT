@@ -1,5 +1,6 @@
 from bottle import post, request, route, view
 from static.model.HtmlEulerCycle import HtmlEulerCycle
+from static.model.EulerGraph import EulerGraph
 from datetime import datetime
 import random
 
@@ -12,9 +13,12 @@ def topic_tarasov():
         year=datetime.now().year,
         new_page=True,
         vertex_count=1,
-        matrix=[],
         random=random,
-        random_value=False)
+        random_value=False,
+        is_result=False,
+        graph='',
+        matrix='',
+        is_old_matrix=False, graph_euler=False, euler_cycle=[])
 
 
 @post('/euler_graph')
@@ -27,22 +31,42 @@ def create_matrix():
             year=datetime.now().year,
             new_page=False,
             vertex_count=vertex_count,
-            matrix=[],
             random=random,
-            random_value=False)
+            random_value=False,
+            is_result=False,
+            graph='',
+            matrix='',
+            is_old_matrix=False, graph_euler=False, euler_cycle=[])
+
     elif request.forms.get("form") == "random":
         return dict(
             year=datetime.now().year,
             vertex_count=vertex_count,
             new_page=False,
-            matrix=[],
             random=random,
-            random_value=True)
-    else:
-        return HtmlEulerCycle.find_euler_cycle_command(vertex_count)
+            random_value=True,
+            is_result=False,
+            graph='',
+            matrix='',
+            is_old_matrix=False, graph_euler=False, euler_cycle=[])
 
 
-@post('/result', method='post')
+@post('/euler_graph_result', method='post')
+@route('/euler_graph_result', method='post')
+@view('method_eulerian_cycle')
 def cycle_search():
-    vertex_count = int(request.forms.getunicode('SHARED_TEXT'))
-    return HtmlEulerCycle.find_euler_cycle_command(vertex_count)
+    vertex_count = int(request.forms.getunicode('VERTEX'))
+    matrix = HtmlEulerCycle.read_matrix_from_page(vertex_count)
+    graph = HtmlEulerCycle.get_graph_image64(matrix)
+    graph_euler, euler_cycle = EulerGraph.find_euler_cycle(matrix[:])
+
+    return dict(
+        year=datetime.now().year,
+        vertex_count=vertex_count,
+        new_page=False,
+        graph=graph,
+        matrix=matrix,
+        random=random,
+        random_value=False,
+        is_result=True,
+        is_old_matrix=True, graph_euler=graph_euler, euler_cycle=euler_cycle)

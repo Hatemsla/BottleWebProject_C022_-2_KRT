@@ -1,4 +1,4 @@
-% rebase('layout.tpl', year=year, vertex_count=vertex_count, random=random, new_page=new_page, random_value=random_value)
+% rebase('layout.tpl', year=year, vertex_count=vertex_count, random=random, new_page=new_page, random_value=random_value, graph=graph, is_result=is_result, matrix=matrix, is_old_matrix=is_old_matrix , graph_euler=graph_euler, euler_cycle=euler_cycle)
 
 <link rel="stylesheet" type="text/css" href="/static/content/euler_graph.css" />
 
@@ -75,15 +75,15 @@
         </div>
         %if not new_page:
             <form action="/euler_graph_result" method="post">
+                <input hidden name="VERTEX" value="{{vertex_count}}">
                 <div class="table-container">
                     <table name='adjacency-table' class="graph-table">
                         <caption>Таблица смежности графа</caption>
                         <thead>
                             <tr>
-
-                                <th class="td-table"></th>
+                                <th style="background-color: #025ddd; font-size: 25; color:#fff;"></th>
                                 %for i in range(1, vertex_count + 1):
-                                    <th class="td-table">{{i}}</th>
+                                    <th style="background-color: #025ddd; font-size: 25; color:#fff;">{{i}}</th>
                                 %end
                             </tr>
                         </thead>
@@ -93,16 +93,24 @@
                                     <th style="background-color: #025ddd; font-size: 25; color:#fff;">{{i}}</th>
                                     %for j in range(1, vertex_count + 1):
                                         %if i == j:
-                                            <td></td>
+                                            <td style="background-color: #f85f37;"></td>
                                         %else:
                                             %if random_value:
                                                 %if random.choice([0, 1]) == 1:
-                                                    <td><input name='cell-{i}-{j}' class="checkbox-table" type='checkbox' checked></td>
+                                                    <td><input name="cell-{{i}}-{{j}}" class="checkbox-table" type='checkbox' checked></td>
                                                 %else:
-                                                    <td><input name='cell-{i}-{j}' class="checkbox-table" type='checkbox'></td>
+                                                    <td><input name="cell-{{i}}-{{j}}" class="checkbox-table" type='checkbox'></td>
                                                 %end
                                             %else:
-                                                <td><input name='cell-{i}-{j}' class="checkbox-table" type='checkbox'></td>
+                                                %if is_old_matrix:
+                                                    %if matrix[i-1][j-1] == 1:
+                                                        <td><input name="cell-{{i}}-{{j}}" class="checkbox-table" type='checkbox' checked></td>
+                                                    %else:
+                                                        <td><input name="cell-{{i}}-{{j}}" class="checkbox-table" type='checkbox'></td>
+                                                    %end
+                                                %else:
+                                                    <td><input name="cell-{{i}}-{{j}}" class="checkbox-table" type='checkbox'></td>
+                                                %end
                                             %end
                                         %end
                                     %end
@@ -117,4 +125,22 @@
             </form>
         %end
     </div>
+    %if is_result:
+        <div class="info-container">
+            <div class="result-container">
+                <div class="graph-container">
+                    <div class="main_graph">
+                        <img src="data:image/png;base64,{{ graph }}"/>
+                    </div>
+                    <p>Рисунок 3 - Нарисованный граф</p>
+                </div>
+            </div>
+            %if not graph_euler:
+                <p class="error">Введённый граф не является Эйлеровым</p>
+            %else:
+                <p><strong>Введённый граф является Эйлеровым</strong></p>
+                <p>Цикл эйлера: <strong>{{euler_cycle}}</strong></p>
+            %end
+        </div>
+    %end
 </div>

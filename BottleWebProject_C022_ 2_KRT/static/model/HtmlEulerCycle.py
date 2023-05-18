@@ -9,32 +9,22 @@ from static.model.EulerGraph import EulerGraph
 
 
 class HtmlEulerCycle:
-    """Класс формирующий html страницу для поиска цикла Эйлера"""
+    """Класс формирующий переменные страницу для поиска цикла Эйлера"""
 
-
-    # Метод формирования страницы и выполнение поиска цикла эйлера
+    # Функция сравнения рёбр матрицы между точками
     @staticmethod
-    def find_euler_cycle_command(vertex_count):
-        return HtmlEulerCycle.site_header + HtmlEulerCycle.method_description + \
-            HtmlEulerCycle.beginning_body % vertex_count + HtmlEulerCycle.random_form % vertex_count + \
-            HtmlEulerCycle.create_result(vertex_count) + \
-            HtmlEulerCycle.end_site
-    
-    # Метод формирования результато поиска цикла эйлера
-    @staticmethod
-    def create_result(vertex_count):
-        checkbox_values = EulerGraph.make_adjacency_matrix_symmetric(HtmlEulerCycle.read_matrix_from_page(vertex_count))
+    def make_adjacency_matrix_symmetric(adjacency_matrix):
+        num_vertices = len(adjacency_matrix)
 
-        page = HtmlEulerCycle.find_form % (vertex_count,
-                                           HtmlEulerCycle.adjacency_matrix_to_html_table(vertex_count,
-                                                                                         checkbox_values))
+        for i in range(num_vertices):
+            for j in range(i + 1, num_vertices):
+                if adjacency_matrix[i][j] != adjacency_matrix[j][i]:
+                    adjacency_matrix[i][j] = adjacency_matrix[j][i] = max(adjacency_matrix[i][j],
+                                                                          adjacency_matrix[j][i])
 
-        existence, euler_cycle = EulerGraph.find_euler_cycle(checkbox_values)
+        return adjacency_matrix
 
-        if existence:
-            return page + HtmlEulerCycle.result_form % ('Цикл существует', euler_cycle)
-        else:
-            return page + HtmlEulerCycle.result_form % ('Цикл отсутствует', euler_cycle)
+
 
     # Метод получения матрицы смежности со страницы HTML
     @staticmethod
@@ -52,7 +42,7 @@ class HtmlEulerCycle:
                 else:
                     row.append(0)
             checkbox_values.append(row)
-        return checkbox_values
+        return HtmlEulerCycle.make_adjacency_matrix_symmetric(checkbox_values)
 
     @staticmethod
     def get_graph_edges(graph_data):
