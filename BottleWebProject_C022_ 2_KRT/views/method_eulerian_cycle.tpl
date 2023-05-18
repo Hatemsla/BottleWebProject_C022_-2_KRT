@@ -80,16 +80,17 @@
                         <caption>Таблица смежности графа</caption>
                         <thead>
                             <tr>
-                                <th></th>
+
+                                <th class="td-table"></th>
                                 %for i in range(1, vertex_count + 1):
-                                    <th>{{i}}</th>
+                                    <th class="td-table">{{i}}</th>
                                 %end
                             </tr>
                         </thead>
                         <tbody>
                             %for i in range(1, vertex_count + 1):
                                 <tr>
-                                    <th>{{i}}</th>
+                                    <th style="background-color: #025ddd; font-size: 25; color:#fff;">{{i}}</th>
                                     %for j in range(1, vertex_count + 1):
                                         %if i == j:
                                             <td></td>

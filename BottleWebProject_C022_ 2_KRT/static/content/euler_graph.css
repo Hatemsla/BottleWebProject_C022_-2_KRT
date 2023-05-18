@@ -104,6 +104,7 @@ button:hover {
 
 .graph-table {
     width: 100%;
+    font-size:25px;
     border-collapse: collapse;
     table-layout: fixed;
 }
@@ -111,7 +112,7 @@ button:hover {
     .graph-table caption {
         margin-bottom: 10px;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 25px;
     }
 
     .graph-table th,
@@ -307,4 +308,9 @@ summary{
   }
 .checkbox-table {
 scale: 1.5;}
+
+.td-table {
+    background: #025ddd;
+    font-size: 25;
+    }
   

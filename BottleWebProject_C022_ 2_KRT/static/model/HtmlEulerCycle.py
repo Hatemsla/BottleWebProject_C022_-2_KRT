@@ -1,60 +1,16 @@
+import base64
 import random
+import networkx as nx
+import io
+import matplotlib.pyplot as plt
+
 from bottle import request
 from static.model.EulerGraph import EulerGraph
-from datetime import date
-
 
 
 class HtmlEulerCycle:
     """Класс формирующий html страницу для поиска цикла Эйлера"""
 
-
-    site_header = '''
-    % rebase('layout.tpl', year=%s)\n''' 
-
-    beginning_body = '''
-    <h1>Матрица смежности</h1>
-    <form action="/matrix" method="post">
-        <p><input type="number" size="50" name="VERTEX" value=%s min=1 max=15 step=1 placeholder="Количество вершин" 
-        required></p>
-        <p><input type="submit" value="Создать матрицу"></p>
-    </form>\n''' 
-
-    random_form = '''<form action="/random" method="post">
-        <input type="hidden" name="SHARED_TEXT" value=%s>
-        <p><input type="submit" value="Заполнить случайно"></p>
-    </form>\n'''
-
-    find_form = '''<form action="/result" method="post">
-        <input type="hidden" name="SHARED_TEXT" value=%s>
-        <p><input type="submit" value="Найти Эйлеров цикл"></p>
-        %s
-    </form>\n'''
-
-    method_description = '''<h1>Описание метода</h1>\n'''
-
-    result_form = '''<div">
-        <p>%s</p>
-        <p>%s</p>
-    </div>\n'''
-
-    end_site = ''''''
-    
-    # Метод формирования новой страницы 
-    @staticmethod
-    def new_page_command():
-        return HtmlEulerCycle.site_header + \
-            HtmlEulerCycle.method_description + \
-            HtmlEulerCycle.beginning_body % 1 + HtmlEulerCycle.random_form % 1 + \
-            HtmlEulerCycle.find_form % (1, '') + HtmlEulerCycle.end_site
-
-    # Метод формирования страницы и создание матрицы смежности
-    @staticmethod
-    def create_matrix_command(vertex_count, random_value):
-        return HtmlEulerCycle.site_header + HtmlEulerCycle.method_description + \
-            HtmlEulerCycle.beginning_body % vertex_count + HtmlEulerCycle.random_form % vertex_count + \
-            HtmlEulerCycle.find_form % (vertex_count, HtmlEulerCycle.create_matrix(vertex_count, random_value)) + \
-            HtmlEulerCycle.end_site
 
     # Метод формирования страницы и выполнение поиска цикла эйлера
     @staticmethod
@@ -98,64 +54,42 @@ class HtmlEulerCycle:
             checkbox_values.append(row)
         return checkbox_values
 
-    # Создание html разметки новой матрицы смежности
     @staticmethod
-    def create_matrix(vertex_count, random_value):
-        # Создание заголовка таблицы
-        header_row = "<tr><th></th>"
-        for i in range(1, vertex_count + 1):
-            header_row += f"<th>{i}</th>"
-        header_row += "</tr>"
+    def get_graph_edges(graph_data):
+        """Функция для конвертации матрицы смежности в список кортежей"""
+        n = len(graph_data)
+        edges = []
+        for i in range(n):
+            for j in range(i, n):
+                if graph_data[i][j] == 1:
+                    edges.append((i + 1, j + 1))
 
-        table = "<table name='adjacency-table'>" + header_row
+        return edges
 
-        # Создание строк таблицы
-        for i in range(1, vertex_count + 1):
-            # Ячейка с номером вершины
-            row = "<tr>" + f"<th>{i}</th>"
-
-            # Ячейки с флажками
-            for j in range(1, vertex_count + 1):
-                if i == j:
-                    row += "<td></td>"
-                else:
-                    if random_value == 1:
-                        if random.choice([0, 1]) == 1:
-                            row += f"<td><input name='cell-{i}-{j}' type='checkbox' checked></td>"
-                        else:
-                            row += f"<td><input name='cell-{i}-{j}' type='checkbox'></td>"
-                    else:
-                        row += f"<td><input name='cell-{i}-{j}' type='checkbox'></td>"
-            table += row + "</tr>"
-        return table + "</table>"
-
-    # Создание html разметки существующей матрицы смежности
     @staticmethod
-    def adjacency_matrix_to_html_table(vertex_count, adj_matrix):
-        header_row = "<tr><th></th>"
-        for i in range(1, vertex_count + 1):
-            header_row += f"<th>{i}</th>"
-        header_row += "</tr>"
+    def get_graph_image(edges):
+        """Функция для получения изображения графа"""
+        G = nx.Graph()
+        G.clear()
+        G.add_edges_from(edges)
+        pos = nx.circular_layout(G)
+        nx.draw_networkx_nodes(G, pos, node_color='green')
+        nx.draw_networkx_edges(G, pos)
+        nx.draw_networkx_labels(G, pos, font_size=10, font_family="sans-serif", font_color='white')
+        buf = io.BytesIO()
+        plt.box(False)
+        plt.savefig(buf, format='png')
+        plt.clf()
 
-        table = "<table name='adjacency-table'>" + header_row
+        return buf
 
-        # Создание строк таблицы
-        for i in range(1, vertex_count + 1):
-            row = "<tr>"
+    @staticmethod
+    def get_graph_image64(graph_data):
+        """Функция для конвертации изображения графа в формат данных base64"""
+        edges = HtmlEulerCycle.get_graph_edges(graph_data)
+        buf = HtmlEulerCycle.get_graph_image(edges)
+        buf.seek(0)
+        main_graph = base64.b64encode(buf.read()).decode('utf-8')
+        buf.close()
 
-            # Ячейка с номером вершины
-            row += f"<th>{i}</th>"
-
-            # Ячейки с флажками
-            for j in range(1, vertex_count + 1):
-                if i == j:
-                    row += "<td></td>"
-                else:
-                    if adj_matrix[i - 1][j - 1] == 1:
-                        row += f"<td><input name='cell-{i}-{j}' type='checkbox' checked></td>"
-                    else:
-                        row += f"<td><input name='cell-{i}-{j}' type='checkbox'></td>"
-
-            table += row + "</tr>"
-        return table + "</table>"
-
+        return main_graph
