@@ -1,4 +1,4 @@
-% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques, main_graph=main_graph, subgraphs=subgraphs, is_valid_graph=is_valid_graph, is_subgraph_draw=is_subgraph_draw)
+% rebase('layout.tpl', graph_count=graph_count, year=year, subgraph_count=subgraph_count, graph_data=graph_data, cliques=cliques, num_cliques=num_cliques, main_graph=main_graph, subgraphs=subgraphs, is_valid_graph=is_valid_graph, is_subgraph_draw=is_subgraph_draw, is_build_matrix=is_build_matrix)
 
 <link rel="stylesheet" type="text/css" href="/static/content/method_subgraph.css" />
 
@@ -9,7 +9,7 @@
 <div class="wrapper">
     <div class="info-container">
         <div class="theory-container">
-            <h1>Требуется найти заданную клику в заданном графе</h1>
+            <h1>Нахождение заданной клики в заданном графе</h1>
             <p>Например, заданная клика представляет собой полный граф из пяти вершин, степень каждой из которых равна четырем. На рисунке 1 представлены диаграмма подграфа и соответствующая ему матрица смежности вершин.</p>
             <div>
                 <img class="graph-image" src="/static/images/subgraph_image.png">
@@ -23,6 +23,7 @@
             </p>
             <p><strong>Кликой</strong> неориентированного графа называется подмножество его вершин, любые две из которых соединены ребром.</p>
             <p><strong>Главной диагональю</strong> квадратной матрицы называют элементы, имеющие одинаковые индексы, то есть те элементы, у которых номер строки совпадает с номером столбца.</p>
+            <p>В таблице смежности, у неориентированного графа, единицы симметричны относительно главной диагонали.</p>
             <div>
                 <img class="graph-image" src="/static/images/main_diagonal.png">
             </div>
@@ -123,12 +124,17 @@
                 </form>  
             </div>
         %end
+        %if not is_valid_graph and not is_build_matrix:
+            <p class="error">Граф заполнен неверно</p>
+        %end
     </div>
     %if is_valid_graph:
         <div class="info-container">
             <div class="result-container">
                 <div class="graph-container">
-                    <img src="data:image/png;base64,{{ main_graph }}"/>
+                    <div class="main_graph">
+                        <img src="data:image/png;base64,{{ main_graph }}"/>
+                    </div>
                     <p>Рисунок 3 - Нарисованный граф</p>
                 </div>
                 %if num_cliques > 0:

@@ -5,6 +5,7 @@ Routes and views for the bottle application.
 from bottle import route, view
 from datetime import datetime
 
+
 @route('/')
 @route('/home')
 @view('index')
@@ -13,6 +14,7 @@ def home():
     return dict(
         year=datetime.now().year
     )
+
 
 @route('/method_subgraph')
 @view('method_subgraph')
@@ -28,7 +30,8 @@ def contact():
         main_graph='',
         subgraphs=[],
         is_valid_graph=False,
-        is_subgraph_draw=True
+        is_subgraph_draw=True,
+        is_build_matrix=True
     )
 
 
@@ -47,16 +50,6 @@ def contact():
         route_data=[]
     )
 
-
-@route('/method_eulerian_cycle')
-@view('method_eulerian_cycle')
-def contact():
-    """Renders the method eulerian cycle page."""
-    return dict(
-        title='Method eulerian cycle',
-        message='Your method eulerian cycle page.',
-        year=datetime.now().year
-    )
 
 @route('/about')
 @view('about')

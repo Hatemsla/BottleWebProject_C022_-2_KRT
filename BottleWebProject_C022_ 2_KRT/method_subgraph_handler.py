@@ -99,7 +99,8 @@ def calculate_subgraph_count(graph_count, subgraph_count, main_graph, is_subgrap
         main_graph=main_graph,
         subgraphs=subgraphs,
         is_valid_graph=is_valid_graph(graph_data),
-        is_subgraph_draw=is_subgraph_draw
+        is_subgraph_draw=is_subgraph_draw,
+        is_build_matrix=False
     )
 
 
@@ -123,7 +124,8 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_s
         main_graph=main_graph,
         subgraphs=subgraphs,
         is_valid_graph=is_valid_graph(graph_data),
-        is_subgraph_draw=is_subgraph_draw
+        is_subgraph_draw=is_subgraph_draw,
+        is_build_matrix=False
     )
     
 
@@ -259,7 +261,8 @@ def form_handler():
             main_graph='',
             subgraphs=[],
             is_valid_graph=False,
-            is_subgraph_draw=True
+            is_subgraph_draw=True,
+            is_build_matrix=True
         )
     elif request.forms.get("form") == "Confirm":
         graph_data = get_form_graph_data(graph_count)

@@ -57,6 +57,7 @@ input[type="checkbox"].input-validation-error {
 
 .navbar-inverse .navbar-brand {
     color: #fff;
+    font-size: 20px;
 }
 
 .navbar-inverse .navbar-brand:hover,
@@ -68,6 +69,7 @@ input[type="checkbox"].input-validation-error {
     color: #fff;
     text-decoration: none; /* Убираем подчеркивание у всех ссылок */
     position: relative;
+    font-size: 16px;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,

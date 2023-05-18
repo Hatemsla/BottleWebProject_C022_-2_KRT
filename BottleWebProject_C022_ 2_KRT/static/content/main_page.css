@@ -51,7 +51,7 @@
 
 .info-container {
   padding: 20px;
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
 .marketing .col-lg-4 {
@@ -176,20 +176,4 @@ p{
     object-fit: contain;
     max-width: 300px;
     max-height: 230px;
-}
-
-
-.btn {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #337ab7;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-  color: #fff;
-  background-color: #23527c;
 }
