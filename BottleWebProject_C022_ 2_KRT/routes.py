@@ -28,7 +28,8 @@ def contact():
         main_graph='',
         subgraphs=[],
         is_valid_graph=False,
-        is_subgraph_draw=True
+        is_subgraph_draw=True,
+        is_build_matrix=True
     )
 
 
