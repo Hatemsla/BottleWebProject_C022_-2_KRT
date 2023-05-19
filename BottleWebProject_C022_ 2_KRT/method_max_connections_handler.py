@@ -31,10 +31,13 @@ def find_max_degree_vertices(graph, k):
         row_sum = max(0, sum(row))
         max_sum = max(max_sum, row_sum)
 
-    vertices = ''
-    for i in range(n):
-        if sum(route_data[i]) == max_sum:
-            vertices += str(i + 1) + ' '
+    if max_sum > 0:
+        vertices = ''
+        for i in range(n):
+            if sum(route_data[i]) == max_sum:
+                vertices += str(i + 1) + ' '
+    else:
+        vertices = 'точки не связаны'
 
     return dict(
         year=datetime.now().year,
@@ -116,12 +119,6 @@ def form_handler():
             res=vertices,
             route_data=route_data
         )
-    elif request.forms.get("form") == "Confirm2":
-        graph_data = get_form_graph_data(graph_count)
-
-        # main_graph = get_graph_image64(graph_data)
-
-        return find_max_degree_vertices(graph_data, k_step)
     elif request.forms.get("form") == "Random2":
         graph_count = int(request.forms.get('graph_count'))
         graph_data = generate_adjacency_matrix(graph_count, 0.6)
@@ -138,6 +135,22 @@ def form_handler():
             res=vertices,
             route_data=route_data
         )
+    elif request.forms.get("form") == "Confirm2":
+
+        graph_data = get_form_graph_data(graph_count)
+
+        res = find_max_degree_vertices(graph_data, k_step)
+        r_data = "["
+        for i in route_data:
+            r_data += f'{i}'
+        r_data += "]"
+        write_file_data(f"{datetime.now()} | k_step= {k_step} "
+                        f"| graph_data = {graph_data} | route_data={r_data} | max_con_vertices=[{vertices}]\n")
+        return res
     else:
         pass
 
+
+def write_file_data(data):
+    with open('static/data_files/data_max_connections.txt', 'a') as file:
+        file.write(data)

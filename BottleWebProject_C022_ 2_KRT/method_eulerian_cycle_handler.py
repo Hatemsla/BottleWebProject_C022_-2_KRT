@@ -77,5 +77,5 @@ def cycle_search():
 
 def write_file_data(data):
     """Запись истории поиска цикла Эйлера в файл"""
-    with open('static/data_files/data_eulerian_cycle.py.txt', 'a') as file:
+    with open('static/data_files/data_eulerian_cycle.txt', 'a') as file:
         file.write(data)
