@@ -68,8 +68,8 @@
                     <input type="number" name="VERTEX" id="VERTEX" value="{{vertex_count}}" min="2" max="15" step=1 placeholder="Размер матрицы смежности графа" required>
                 </div>
                 <div class="form-buttons">
-                    <button type="submit" name="form" value="matrix">Построить матрицу</button>
-                    <button type="submit" name="form" value="random">Случайная матрица</button>
+                    <button class="btn" type="submit" name="form" value="matrix">Построить матрицу</button>
+                    <button class="btn" type="submit" name="form" value="random">Случайная матрица</button>
                 </div>
             </form>
         </div>
@@ -119,7 +119,7 @@
                         </tbody>
                     </table>
                     <div class="form-buttons">
-                        <button type="submit" name="form" value="result">Найти цикл Эйлера</button>
+                        <button class="btn" type="submit" name="form" value="result">Найти цикл Эйлера</button>
                     </div>
                 </div>
             </form>
