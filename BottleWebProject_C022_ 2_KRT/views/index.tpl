@@ -22,8 +22,8 @@
         </ul>
     </div>
 
-    <div class="marketing container">
-        <div>
+    <div class="info-container">
+        <div class="marketing container">
             <div class="card col-lg-4">
                 <div class="inside">
                     <h2>Поиск подграфов в графе</h2>
