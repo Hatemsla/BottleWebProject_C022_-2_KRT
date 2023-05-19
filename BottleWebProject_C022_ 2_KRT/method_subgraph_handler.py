@@ -5,16 +5,18 @@ import base64
 import io
 import networkx as nx
 import matplotlib.pyplot as plt
+import json
 
 graph_count = subgraph_count = 0
 prev_graph_count = 0
 graph_data = []
 main_graph = ''
 is_subgraph_draw = True
+data_file_path = 'static/data_files/data_subgraph.json'
 
 
 def adjacency_matrix_to_graph(adj_matrix):
-    """Функция для преоброзования таблицы смежности графа в словарь, где ключи - номера нод, а значения списки соединений"""
+    """Функция для преобразования таблицы смежности графа в словарь, где ключи - номера нод, а значения списки соединений"""
     graph = {}
     for i in range(len(adj_matrix)):
         edges = []
@@ -114,6 +116,8 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_s
         subgraphs = []
     cliques.sort(key=lambda x: x[0])
 
+    save_data(graph_data, subgraph_count, cliques)
+
     return dict(
         graph_count=f'{graph_count}',
         subgraph_count=f'{subgraph_count}',
@@ -128,6 +132,29 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_s
         is_build_matrix=False
     )
     
+    
+def save_data(graph_data, cliques, subgraph_count):
+    global data_file_path
+    try:
+        with open(data_file_path, 'r') as f:
+            existing_data = json.load(f)
+    except:
+        existing_data = {}
+        
+    if not existing_data:
+        index = 1
+    else:
+        index = int(max(existing_data.keys())) + 1
+        
+    data = {}
+    data['graph_data'] = graph_data
+    data['cliques'] = cliques
+    data['subgraph_count'] = subgraph_count 
+    existing_data[str(index)] = data
+    
+    with open(data_file_path, 'w') as f:
+        json.dump(existing_data, f, indent=4)
+        
 
 def get_graph_edges(graph_data):
     """Функция для конвертации матрицы смежности в список кортежей"""
@@ -211,7 +238,7 @@ def get_graph_image64(graph_data):
 
 
 def get_subgraphs_image64(graph_data, cliques):
-    """Функция для получения картинок сабграфа"""
+    """Функция для получения картинок подграфа"""
     subgraph = []
     edges = get_graph_edges(graph_data)
     bufs = get_subgraph_images(edges, cliques)
