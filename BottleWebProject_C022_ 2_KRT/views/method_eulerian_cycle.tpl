@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="/static/content/euler_graph.css" />
 
 <div class="background">
-  <img class="back_image" src="/static/images/graph_wallpaper1.jpg" />
+  <img class="back_image" src="/static/images/graph_wallpaper6.png" />
 </div>
 
 <div class="wrapper">
