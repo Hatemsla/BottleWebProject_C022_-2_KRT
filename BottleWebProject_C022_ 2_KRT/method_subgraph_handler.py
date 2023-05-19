@@ -90,6 +90,8 @@ def calculate_subgraph_count(graph_count, subgraph_count, main_graph, is_subgrap
     else:
         subgraphs = []
     cliques.sort(key=lambda x: x[0])
+    
+    save_data(graph_data, cliques, subgraph_count, num_cliques)
 
     return dict(
         graph_count=f'{graph_count}',
@@ -116,7 +118,7 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_s
         subgraphs = []
     cliques.sort(key=lambda x: x[0])
 
-    save_data(graph_data, subgraph_count, cliques)
+    save_data(graph_data, cliques, subgraph_count, num_cliques)
 
     return dict(
         graph_count=f'{graph_count}',
@@ -133,10 +135,11 @@ def calculate_random_subgraph_count(graph_data, subgraph_count, main_graph, is_s
     )
     
     
-def save_data(graph_data, cliques, subgraph_count):
+def save_data(graph_data, cliques, subgraph_count, num_cliques):
+    """Функция для сохранения данных"""
     global data_file_path
     try:
-        with open(data_file_path, 'r') as f:
+        with open(data_file_path, 'r', encoding='utf-8') as f:
             existing_data = json.load(f)
     except:
         existing_data = {}
@@ -147,13 +150,18 @@ def save_data(graph_data, cliques, subgraph_count):
         index = int(max(existing_data.keys())) + 1
         
     data = {}
+    data['time'] = datetime.now().isoformat()
+    if num_cliques:
+        data['find_cliques'] = f'Найдено подграфов: {num_cliques}'
+    else:
+        data['find_cliques'] = 'Не найдено подграфов в графе'
+    data['subgraph_count'] = subgraph_count 
     data['graph_data'] = graph_data
     data['cliques'] = cliques
-    data['subgraph_count'] = subgraph_count 
     existing_data[str(index)] = data
     
-    with open(data_file_path, 'w') as f:
-        json.dump(existing_data, f, indent=4)
+    with open(data_file_path, 'w', encoding='utf-8') as f:
+        json.dump(existing_data, f, indent=4, ensure_ascii=False)
         
 
 def get_graph_edges(graph_data):
