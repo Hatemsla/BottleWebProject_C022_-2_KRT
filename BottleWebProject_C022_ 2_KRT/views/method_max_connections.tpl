@@ -95,7 +95,9 @@
                         %end
                     </tbody>
                 </table>
-                <p class="confirm2"><button class="btn" type="submit" name="form" value="Confirm2">Посчитать</button></p>
+                <p class="confirm">
+                    <button class="btn" type="submit" name="form" value="Confirm2">Посчитать</button>
+                </p>
             </form>
         </div>
         %end
