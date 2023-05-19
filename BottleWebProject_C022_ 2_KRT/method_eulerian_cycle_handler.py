@@ -3,8 +3,7 @@ from static.model.HtmlEulerCycle import HtmlEulerCycle
 from static.model.EulerGraph import EulerGraph
 from datetime import datetime
 import random
-import json
-import os.path
+
 file_path = "data_euler_cycle.tpl.json"
 
 
@@ -62,7 +61,8 @@ def cycle_search():
     matrix = HtmlEulerCycle.read_matrix_from_page(vertex_count)
     graph = HtmlEulerCycle.get_graph_image64(matrix)
     graph_euler, euler_cycle = EulerGraph.find_euler_cycle(matrix[:])
-
+    write_file_data(f"{datetime.now()} | vertex count= {vertex_count} "
+                    f"| matrix = {matrix} | is euler graph = {graph_euler} | euler cycle={euler_cycle}\n")
     return dict(
         year=datetime.now().year,
         vertex_count=vertex_count,
@@ -74,20 +74,8 @@ def cycle_search():
         is_result=True,
         is_old_matrix=True, graph_euler=graph_euler, euler_cycle=euler_cycle)
 
-def read_file_data():
 
-
-    return ''
-
-
-def write_data_to_file(data):
-
-
-    return
-
-def file_exist():
-    if os.path.isfile(file_path):
-        return
-    else:
-        with open(file_path, 'w') as fp:
-            json.dump(questions, fp)
+def write_file_data(data):
+    """Запись истории поиска цикла Эйлера в файл"""
+    with open('static/data_files/data_eulerian_cycle.py.txt', 'a') as file:
+        file.write(data)
