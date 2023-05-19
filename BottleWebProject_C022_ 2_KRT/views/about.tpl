@@ -1,6 +1,6 @@
 % rebase('layout.tpl', title=title, year=year)
 
-<link rel="stylesheet" href="/static/content/style_authors_page.css">
+<link rel="stylesheet" href="/static/content/style_authors_page.css" xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" href="/static/content/font-awesome.css">
 
 
@@ -74,35 +74,35 @@
 				</a>
 			</div>
 
-			<div class="container marketing">
-
-				<div class="row">
-					<div class="col-lg-4">
-						<div class="image-person-kirill">
-							<a href="https://github.com/kirushaaxd">
-								<img class="img-circle img-circle_kirusha" src="https://avatars.githubusercontent.com/u/125600107?v=4" alt="Рыхлов Кирилл" width="170" height="170">
-							</a>			
-						</div>		
-						<h2>Рыхлов Кирилл</h2>
-						<p class="about-person" >Главный лентяй и создатель схем.</p>
+			<div class="info-container">
+				<div class="container marketing">
+					<div class="card col-lg-4">
+						<a style="text-decoration: None; color: #000;" href="https://github.com/kirushaaxd">
+							<div class="inside">
+								<img class="img-cart" src="https://avatars.githubusercontent.com/u/125600107?v=4" alt="Рыхлов Кирилл" width="170" height="170">
+								<h2>Рыхлов Кирилл</h2>
+								<p class="about-person" >Главный лентяй и создатель схем.</p>
+							</div>
+						</a>
 					</div>
-					<div class="col-lg-4">
-						<div class="image-person-nik">
-							<a href="https://github.com/TNV-801">
-								<img class="img-circle img-circle_nikitka" src="https://avatars.githubusercontent.com/u/89140653?v=4" alt="Тарасов Никита" width="170" height="170">
-							</a>
-						</div>		
-						<h2>Тарасов Никита</h2>
-						<p class="about-person" >Главный ломатель коммитов и дронер.</p>
+					<div class="card col-lg-4">
+						<a style="text-decoration: None; color: #000;" href="https://github.com/TNV-801">
+							<div class="inside">
+								<img class="img-cart" src="https://avatars.githubusercontent.com/u/89140653?v=4" alt="Тарасов Никита" width="170" height="170">
+								<h2>Тарасов Никита</h2>
+								<p class="about-person" >Главный ломатель коммитов и дронер.</p>
+							</div>
+						</a>
 					</div>
-					<div class="col-lg-4">
-						<div class="image-person-jan">
-							<a href="https://github.com/Hatemsla">
-								<img class="img-circle img-circle_yaya" src="https://avatars.githubusercontent.com/u/81965397?v=4" alt="Калашников Ян" width="170" height="170">
-							</a>
-						</div>	
-						<h2>Калашников Ян</h2>
-						<p class="about-person" >Создатель репозитория и главный технический специалист в области Git.</p>
+					<div class="card col-lg-4">
+						<a style="text-decoration: None; color: #000;" href="https://github.com/Hatemsla">
+							<div class="inside">
+								<img class="img-cart" src="https://avatars.githubusercontent.com/u/81965397?v=4" alt="Калашников Ян" width="170" height="170">
+								<h2>Калашников Ян</h2>
+								<p class="about-person" >Создатель репозитория и главный технический специалист в области Git.</p>
+							</div>
+						</a>
+					</div>
 					</div>
 				</div>
 			</div>
