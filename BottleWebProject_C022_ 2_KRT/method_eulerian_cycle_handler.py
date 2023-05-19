@@ -3,6 +3,9 @@ from static.model.HtmlEulerCycle import HtmlEulerCycle
 from static.model.EulerGraph import EulerGraph
 from datetime import datetime
 import random
+import json
+import os.path
+file_path = "data_euler_cycle.tpl.json"
 
 
 @post('/method_eulerian_cycle')
@@ -70,3 +73,21 @@ def cycle_search():
         random_value=False,
         is_result=True,
         is_old_matrix=True, graph_euler=graph_euler, euler_cycle=euler_cycle)
+
+def read_file_data():
+
+
+    return ''
+
+
+def write_data_to_file(data):
+
+
+    return
+
+def file_exist():
+    if os.path.isfile(file_path):
+        return
+    else:
+        with open(file_path, 'w') as fp:
+            json.dump(questions, fp)
