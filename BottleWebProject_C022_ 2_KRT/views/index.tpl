@@ -63,6 +63,5 @@
             </div>
         </div>
     </div>
-    <p>&shy;</p>
 </div>
 
