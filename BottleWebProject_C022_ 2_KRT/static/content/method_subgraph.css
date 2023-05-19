@@ -79,28 +79,15 @@ input[type="number"] {
     margin-left: 10px;
 }
 
-button {
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #0077FF;
-    color: #FFF;
-    font-size: 18px;
-    cursor: pointer;
-}
 
 .form-buttons{
-    margin: 0 auto;
 }
 
 .confirm {
     text-align: center;
 }
 
-button:hover {
-    background-color: #005EDD;
-}
+
 
 .graph-table {
     width: 100%;
@@ -145,18 +132,25 @@ button:hover {
 
 .btn {
     display: inline-block;
-    margin-bottom: 0;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+    margin: 20px;
     background-image: none;
     border: 1px solid transparent;
     white-space: nowrap;
     padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
+    font-size: 20px;
     border-radius: 4px;
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+    color: #fff;
+    background-color: #3097ff;
 }
 
 .btn-default {

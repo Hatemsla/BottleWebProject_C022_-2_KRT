@@ -147,7 +147,6 @@ button:hover {
 
 .btn {
     display: inline-block;
-    margin-bottom: 0;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -156,10 +155,18 @@ button:hover {
     border: 1px solid transparent;
     white-space: nowrap;
     padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
+    font-size: 20px;
     border-radius: 4px;
+    background-color: #337ab7;
+    color: #fff;
 }
+
+.btn:hover {
+  transform: scale(1.1);
+    color: #fff;
+    background-color: #3097ff;
+}
+
 
 .btn-default {
     color: #333333;

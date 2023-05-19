@@ -29,7 +29,7 @@
 							<div class="carousel-caption">
 								<h1>Наша команда</h1>
 								<p>Молодая команда перспективных разработчиков.</p>
-								<p><a class="btn btn-lg btn-primary button-bot" href="https://github.com/Hatemsla/BottleWebProject_C022_2_KRT" role="button">Наш проект</a></p>
+								<p><a class="btn" href="https://github.com/Hatemsla/BottleWebProject_C022_2_KRT" role="button">Наш проект</a></p>
 							</div>
 						</div>
 					</div>
@@ -39,7 +39,7 @@
 							<div class="carousel-caption">
 								<h1>Наша команда</h1>
 								<p>Программирует на таких языках как: C#, C++, Python, Java и др.</p>
-								<p><a class="btn btn-lg btn-primary button-bot" href="https://github.com/TNV-801" role="button">Никита</a></p>
+								<p><a class="btn" href="https://github.com/TNV-801" role="button">Никита</a></p>
 							</div>
 						</div>
 					</div>
@@ -49,7 +49,7 @@
 							<div class="carousel-caption">
 								<h1>Наша команда</h1>
 								<p>Занимается проектировкой баз данных, в частности используем MySQL, SQLite и PostgreSQL.</p>
-								<p><a class="btn btn-lg btn-primary button-bot" href="https://github.com/Hatemsla" role="button">Ян</a></p>
+								<p><a class="btn" href="https://github.com/Hatemsla" role="button">Ян</a></p>
 							</div>
 						</div>
 					</div>

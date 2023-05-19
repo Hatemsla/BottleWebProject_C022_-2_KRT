@@ -9,6 +9,35 @@ body {
     padding-bottom: 20px;
 }
 
+.btn {
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 20px;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 20px;
+    border-radius: 4px;
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+    color: #fff;
+    background-color: #3097ff;
+}
+
+.btn-default {
+    color: #333333;
+    background-color: #FFFFFF;
+    border-color: #CCCCCC;
+}
+
 .button-bot {
       -webkit-border-radius: 15px;
       -moz-border-radius: 15px;

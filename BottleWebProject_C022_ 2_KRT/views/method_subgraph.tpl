@@ -83,8 +83,8 @@
                     %end
                 </div>
                 <div class="form-buttons">
-                    <button type="submit" name="form" value="Send1">Построить матрицу</button>
-                    <button type="submit" name="form" value="Random">Случайная матрица</button>
+                    <button class="btn" type="submit" name="form" value="Send1">Построить матрицу</button>
+                    <button class="btn" type="submit" name="form" value="Random">Случайная матрица</button>
                 </div>
             </form>
         </div>
@@ -120,7 +120,7 @@
                             %end
                         </tbody>
                     </table>
-                    <p class="confirm"><button type="submit" name="form" value="Confirm">Посчитать</button></p>
+                    <p class="confirm"><button class="btn" type="submit" name="form" value="Confirm">Посчитать</button></p>
                 </form>  
             </div>
         %end

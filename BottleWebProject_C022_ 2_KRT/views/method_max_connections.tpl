@@ -58,8 +58,8 @@
                     <input type="number" id="k_step" value="{{k_step}}" required min="1" max="5" pattern="[0-9]+" name="k_step" placeholder="Глубина шага k">
                 </div>
                 <div class="form-buttons">
-                    <button type="submit" name="form" value="Send2">Построить матрицу</button>
-                    <button type="submit" name="form" value="Random2">Заполнить случайно</button>
+                    <button class="btn" type="submit" name="form" value="Send2">Построить матрицу</button>
+                    <button class="btn" type="submit" name="form" value="Random2">Заполнить случайно</button>
                 </div>
             </form>
         </div>
@@ -95,7 +95,7 @@
                         %end
                     </tbody>
                 </table>
-                <p class="confirm2"><button type="submit" name="form" value="Confirm2">Посчитать</button></p>
+                <p class="confirm2"><button class="btn" type="submit" name="form" value="Confirm2">Посчитать</button></p>
             </form>
         </div>
         %end
