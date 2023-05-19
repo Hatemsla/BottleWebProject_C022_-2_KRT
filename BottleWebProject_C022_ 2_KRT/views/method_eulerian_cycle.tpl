@@ -9,7 +9,7 @@
 <div class="wrapper">
     <div class="info-container">
         <div class="theory-container">
-            <h1>Поиск цикла Эйлера в Эйлеровом графе.</h1>
+            <h1><strong>Поиск цикла Эйлера в Эйлеровом графе.</strong></h1>
             <p>Например, заданный граф имеет эйлеров цикл, так как каждая вершина имеет четную степень. Граф является Эйлеровым и содержит следующий цикл Эйлера: 1 - 4 - 5 - 2 - 4 -3 - 2 - 1</p>
             <div>
                 <img class="graph-image" src="/static/images/euler_graph_example.png">
@@ -65,7 +65,7 @@
             <form action="/euler_graph" method="post">
                 <div class="form-input">
                     <label for="VERTEX">Введите количество вершин графа:</label>
-                    <input type="number" name="VERTEX" id="VERTEX" value="{{vertex_count}}" required min="2" max="15" step=1 placeholder="Размер матрицы смежности графа" required>
+                    <input type="number" name="VERTEX" id="VERTEX" value="{{vertex_count}}" min="2" max="15" step=1 placeholder="Размер матрицы смежности графа" required>
                 </div>
                 <div class="form-buttons">
                     <button type="submit" name="form" value="matrix">Построить матрицу</button>
