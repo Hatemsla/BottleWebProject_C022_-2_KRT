@@ -11,6 +11,7 @@ file_path = "data_euler_cycle.tpl.json"
 @route('/method_eulerian_cycle')
 @view('method_eulerian_cycle')
 def topic_tarasov():
+    """Обработчик создание новой страницы"""
     return dict(
         year=datetime.now().year,
         new_page=True,
@@ -27,6 +28,7 @@ def topic_tarasov():
 @route('/euler_graph')
 @view('method_eulerian_cycle')
 def create_matrix():
+    """Обработчик на создание страницы с новой матрицей или создание новой матрицы с случайным заполнением"""
     vertex_count = int(request.forms.getunicode('VERTEX'))
     if request.forms.get("form") == "matrix":
         return dict(
@@ -57,6 +59,7 @@ def create_matrix():
 @route('/euler_graph_result', method='post')
 @view('method_eulerian_cycle')
 def cycle_search():
+    """Обработчик запроса на поиск цикла Эйлера в заданом графе"""
     vertex_count = int(request.forms.getunicode('VERTEX'))
     matrix = HtmlEulerCycle.read_matrix_from_page(vertex_count)
     graph = HtmlEulerCycle.get_graph_image64(matrix)

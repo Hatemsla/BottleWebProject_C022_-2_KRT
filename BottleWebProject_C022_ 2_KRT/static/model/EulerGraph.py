@@ -7,6 +7,7 @@ class EulerGraph:
     # Функция определения графа как Эйлерова
     @staticmethod
     def is_eulerian_graph(adjacency_matrix):
+        """Проверка что граф является Эйлеровым"""
         num_vertices = len(adjacency_matrix)
         
         # Проверка на количество вершин
@@ -23,6 +24,7 @@ class EulerGraph:
 
     @staticmethod
     def is_empty_graph(adjacency_matrix):
+        """Проверка на пустоту графа"""
         for row in adjacency_matrix:
             if any(row):
                 return True
@@ -30,6 +32,7 @@ class EulerGraph:
 
     @staticmethod
     def find_euler_cycle(matrix):
+        """Функция производящая поиск цикла эйлера"""
         adjacency_matrix = copy.deepcopy(matrix)
         if not EulerGraph.is_eulerian_graph(adjacency_matrix) or not EulerGraph.is_empty_graph(adjacency_matrix):
             return False, []
@@ -55,16 +58,4 @@ class EulerGraph:
 
         return True, [x + 1 for x in cycle]
 
-
-    # Функция сравнения рёбр матрицы между точками
-    @staticmethod
-    def make_adjacency_matrix_symmetric(adjacency_matrix):
-        num_vertices = len(adjacency_matrix)
-
-        for i in range(num_vertices):
-            for j in range(i+1, num_vertices):
-                if adjacency_matrix[i][j] != adjacency_matrix[j][i]:
-                    adjacency_matrix[i][j] = adjacency_matrix[j][i] = max(adjacency_matrix[i][j], adjacency_matrix[j][i])
-
-        return adjacency_matrix
 

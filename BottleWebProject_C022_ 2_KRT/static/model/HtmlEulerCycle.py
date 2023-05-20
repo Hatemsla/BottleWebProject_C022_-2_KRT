@@ -11,9 +11,9 @@ from static.model.EulerGraph import EulerGraph
 class HtmlEulerCycle:
     """Класс формирующий переменные страницу для поиска цикла Эйлера"""
 
-    # Функция сравнения рёбр матрицы между точками
     @staticmethod
     def make_adjacency_matrix_symmetric(adjacency_matrix):
+        """Функция сравнения рёбр матрицы между точками"""
         num_vertices = len(adjacency_matrix)
 
         for i in range(num_vertices):
@@ -26,9 +26,9 @@ class HtmlEulerCycle:
 
 
 
-    # Метод получения матрицы смежности со страницы HTML
     @staticmethod
     def read_matrix_from_page(vertex_count):
+        """Метод получения матрицы смежности со страницы HTML"""
         checkbox_values = []
         for i in range(1, vertex_count + 1):
             row = []
