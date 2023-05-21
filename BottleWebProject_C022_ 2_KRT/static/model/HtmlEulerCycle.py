@@ -1,11 +1,9 @@
 import base64
-import random
-import networkx as nx
 import io
-import matplotlib.pyplot as plt
 
+import matplotlib.pyplot as plt
+import networkx as nx
 from bottle import request
-from static.model.EulerGraph import EulerGraph
 
 
 class HtmlEulerCycle:

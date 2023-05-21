@@ -1,6 +1,17 @@
+import sys
+import os
+
+# Получение абсолютного пути к текущему скрипту
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Получение пути к folder1
+folder1_path = os.path.join(current_dir, 'static')
+
+# Добавление пути к folder1 в sys.path
+sys.path.append(folder1_path)
 from bottle import post, request, route, view
-from static.model.HtmlEulerCycle import HtmlEulerCycle
-from static.model.EulerGraph import EulerGraph
+from model.HtmlEulerCycle import HtmlEulerCycle
+from model.EulerGraph import EulerGraph
 from datetime import datetime
 import random
 
