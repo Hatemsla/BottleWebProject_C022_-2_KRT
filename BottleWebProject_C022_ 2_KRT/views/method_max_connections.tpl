@@ -15,13 +15,13 @@
         <h2>Метод решения задачи:</h2>
         <p>Возьмем за основу следующую матрицу:</p>
         <div>
-         <img class="graph-image" src="/static/images/max_con_theory1.png">
+         <img class="graph-image" src="/static/images/max_con_theory1.png" alt="theory 1">
         </div>
         <p class="graph-image-text">Рисунок 1 – Матрица смежности графа</p>
         <p>Выполним расчеты для шага k=4</p>
         <p>Вычислим степени матрицы:</p>
         <div>
-         <img class="graph-image" src="/static/images/max_con_theory2.png">
+         <img class="graph-image" src="/static/images/max_con_theory2.png" alt="theory 2">
         </div>
         <p class="graph-image-text">Рисунок 2 – Булевы степени матрицы</p>
         <p>Матрица E1 показывает, в какие вершины мы можем попасть за 1 шаг.</p>
@@ -31,7 +31,7 @@
         <p>Если посмотреть, то за второй шаг мы попадаем во все вершины, в которые не попали за первый шаг.</p>
         <p>Получим матрицу достижимости. Она показывает, есть ли путь из вершины a в вершину b..</p>
         <div>
-         <img class="graph-image" src="/static/images/max_con_theory3.png">
+         <img class="graph-image" src="/static/images/max_con_theory3.png" alt="theory 3">
         </div>
         <p class="graph-image-text">Рисунок 3 – Матрица достижимости</p>
         <p>По полученной матрице достижимостей мы можем найти точки, обладающие наибольшим окружением (те, где больше всего 1 в строках)</p>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-input">
                     <label for="k_step">Введите количество ярусов:</label>
-                    <input type="number" id="k_step" value="{{k_step}}" required min="1" max="5" pattern="[0-9]+" name="k_step" placeholder="Глубина шага k">
+                    <input type="number" id="k_step" value="{{k_step}}" required min="1" max="5" name="k_step" placeholder="Глубина шага k">
                 </div>
                 <div class="form-buttons">
                     <button class="btn" type="submit" name="form" value="Send2">Построить матрицу</button>
