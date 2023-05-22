@@ -57,7 +57,8 @@ class TestPositiveFindCycleEuler(unittest.TestCase):
         self.assertEqual(expected_answer, actual_answer)
 
     def test_find_euler_cycle_4_vertexes_true_and_cycle(self):
-        """Unit тест проверки что граф является Эйлеровым и поиска цикла. передаёстся 4 вершины. Ожидаемый результат true и цикл"""
+        """Unit тест проверки что граф является Эйлеровым и поиска цикла. передаёстся 4 вершины. Ожидаемый результат
+        true и цикл"""
         # Arrange
         matrix = [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]]
         expected_answer = True
@@ -71,7 +72,8 @@ class TestPositiveFindCycleEuler(unittest.TestCase):
         self.assertEqual(expected_cycle, euler_cycle)
 
     def test_find_euler_cycle_5_vertexes_true_and_cycle(self):
-        """Unit тест проверки что граф является Эйлеровым и поиска цикла. передаёстся 5 вершин. Ожидаемый результат true и цикл"""
+        """Unit тест проверки что граф является Эйлеровым и поиска цикла. передаёстся 5 вершин. Ожидаемый результат
+        true и цикл"""
         # Arrange
         matrix = [[0, 1, 0, 1, 0], [1, 0, 1, 1, 1], [0, 1, 0, 1, 0], [1, 1, 1, 0, 1], [0, 1, 0, 1, 0]]
         expected_answer = True
@@ -85,7 +87,8 @@ class TestPositiveFindCycleEuler(unittest.TestCase):
         self.assertEqual(expected_cycle, euler_cycle)
 
     def test_find_euler_cycle_9_vertexes_true_and_cycle(self):
-        """Unit тест проверки что граф является Эйлеровым и поиска цикла. передаёстся 9 вершин. Ожидаемый результат true и цикл"""
+        """Unit тест проверки что граф является Эйлеровым и поиска цикла. передаёстся 9 вершин. Ожидаемый результат
+        true и цикл"""
         # Arrange
         matrix = [[0, 1, 1, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 0, 1, 1, 0], [1, 1, 0, 1, 1, 0, 0, 0, 0],
                   [0, 0, 1, 0, 1, 0, 0, 0, 0], [0, 0, 1, 1, 0, 1, 0, 1, 0], [0, 0, 0, 0, 1, 0, 1, 1, 1],
