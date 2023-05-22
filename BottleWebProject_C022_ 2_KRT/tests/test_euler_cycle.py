@@ -6,7 +6,7 @@ import os
 # Получение абсолютного пути к текущему скрипту
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Получение пути к folder1
+# Получение пути
 folder1_path = os.path.join(current_dir, '..', 'static')
 
 # Добавление пути к folder1 в sys.path
@@ -25,7 +25,7 @@ class TestPositiveFindCycleEuler(unittest.TestCase):
         expected_answer = True
 
         # Act
-        actual_answer = EulerGraph.is_eulerian_graph(matrix)
+        actual_answer = EulerGraph.is_eulerian_graph(matrix) and EulerGraph.is_empty_graph(matrix)
 
         # Assert
         self.assertEqual(expected_answer, actual_answer)
@@ -147,7 +147,7 @@ class TestNegativeFindCycleEuler(unittest.TestCase):
         # Assert
         self.assertEqual(expected_answer, actual_answer)
 
-    def test_graph_is_euler_6_vertexes_graph_is_not_euler(self):
+    def test_graph_is_euler_15_vertexes_graph_is_not_euler(self):
         """Unit тест проверки что граф является Эйлеровым. передаёстся 15 вершин. Ожидаемый результат false"""
         # Arrange
         matrix = [[0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1], [1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1], [0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1], [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1], [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1], [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0], [1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1], [1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1], [1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1], [1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1], [0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1], [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]]
@@ -159,8 +159,6 @@ class TestNegativeFindCycleEuler(unittest.TestCase):
         # Assert
         self.assertEqual(expected_answer, actual_answer)
 
-    def test_4(self):
-        """"""
 
 
 if __name__ == '__main__':
