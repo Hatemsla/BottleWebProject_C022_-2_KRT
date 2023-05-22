@@ -1,7 +1,8 @@
+import random
+from datetime import datetime
+
 import numpy as np
 from bottle import post, request, route, view
-from datetime import datetime
-import random
 
 vertices = ''
 
@@ -39,27 +40,7 @@ def find_max_degree_vertices(graph, k):
     else:
         vertices = 'точки не связаны'
 
-    return dict(
-        year=datetime.now().year,
-        graph_count=f'{graph_count}',
-        k_step=f'{k_step}',
-        graph_data=graph_data,
-        main_graph='',
-        is_valid_graph=False,
-        res=vertices,
-        route_data=route_data
-    )
-
-
-
-# find_max_degree_vertices([[0, 1, 1, 0, 0, 1, 1, 0],
-#                           [1, 0, 1, 0, 0, 0, 0, 0],
-#                           [1, 1, 0, 0, 0, 1, 1, 0],
-#                           [0, 0, 0, 0, 0, 0, 1, 0],
-#                           [0, 0, 0, 0, 0, 1, 1, 1],
-#                           [1, 0, 1, 0, 1, 0, 0, 0],
-#                           [1, 0, 1, 1, 1, 0, 0, 0],
-#                           [0, 0, 0, 0, 1, 0, 0, 0]], 3)
+    return vertices, route_data
 
 
 def get_form_graph_data(graph_c):
@@ -139,14 +120,24 @@ def form_handler():
 
         graph_data = get_form_graph_data(graph_count)
 
-        res = find_max_degree_vertices(graph_data, k_step)
+        vertices, route_data = find_max_degree_vertices(graph_data, k_step)
         r_data = "["
         for i in route_data:
             r_data += f'{i}'
         r_data += "]"
         write_file_data(f"{datetime.now()} | k_step= {k_step} "
                         f"| graph_data = {graph_data} | route_data={r_data} | max_con_vertices=[{vertices}]\n")
-        return res
+
+        return dict(
+            year=datetime.now().year,
+            graph_count=f'{graph_count}',
+            k_step=f'{k_step}',
+            graph_data=graph_data,
+            main_graph='',
+            is_valid_graph=False,
+            res=vertices,
+            route_data=route_data
+        )
     else:
         pass
 
